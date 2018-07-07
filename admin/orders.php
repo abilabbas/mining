@@ -110,7 +110,7 @@
 <!--  -->
 <div class="row flex-nowrap justify-content-between align-items-center">
           <div class="col-4 pt-1">
-            <a class="text-muted" href="addorder.php">Add Order</a>
+            <a class="text-muted" href="pilihmemberorder.php">Add Order</a>
           </div>
           <div class="col-4 text-center">
             <a class="blog-header-logo text-dark" href="#">Large</a>
