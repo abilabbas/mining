@@ -1,32 +1,5 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="assets/img/favicon.png">
+<?php include "header.php";?>
 
-    <title>Add Member - DoorjekAnalytic</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <!--<link href="https://bootstrap-themes.github.io/dashboard/assets/css/toolkit-light.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="dashboard.css" rel="stylesheet">
-  </head>
-
-  <body>
-    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="index.php"><img src="assets/img/logo.png"><small>Analytic</small></a>
-      
-      <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-          <a class="nav-link" href="#">Sign out</a>
-        </li>
-      </ul>
-    </nav>
 
     <div class="container-fluid">
       <div class="row">
@@ -74,64 +47,76 @@
             </div>
           </div>
 
-         <div class="row">
+<!--info-->
+        <div class="row">
         <div class="col-md-4 order-md-2 mb-4">
           <h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span class="text-muted">Your cart</span>
-            <span class="badge badge-secondary badge-pill">3</span>
+            <span class="text-muted">Info</span>
+            <span class="badge badge-secondary badge-pill"></span>
           </h4>
           <ul class="list-group mb-3">
             <li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>
-                <h6 class="my-0">Product name</h6>
-                <div class="text-muted">Brief description</div>
+                <h6 class="my-0">Member Doorjek</h6>
+                <div class="text-muted">Last Update</div>
               </div>
-              <span class="text-muted">$12</span>
+              <span class="text-muted"><?php echo $jumlahmember ; ?></span>
             </li>
             <li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>
-                <h6 class="my-0">Second product</h6>
+                <h6 class="my-0">Doormobil Complete</h6>
                 <div class="text-muted">Brief description</div>
               </div>
-              <span class="text-muted">$8</span>
+              <span class="text-muted">14</span>
             </li>
             <li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>
-                <h6 class="my-0">Third item</h6>
+                <h6 class="my-0">Doormotor Complete</h6>
                 <div class="text-muted">Brief description</div>
               </div>
-              <span class="text-muted">$5</span>
+              <span class="text-muted">20</span>
             </li>
-            <li class="list-group-item d-flex justify-content-between bg-light">
-              <div class="text-success">
-                <h6 class="my-0">Promo code</h6>
-                <div class="text-muted">EXAMPLECODE</div>
-              </div>
-              <span class="text-success">-$5</span>
-            </li>
+            
             <li class="list-group-item d-flex justify-content-between">
-              <span>Total (USD)</span>
-              <strong>$20</strong>
+              <span>Total Order</span>
+              <strong>87</strong>
             </li>
           </ul>
-
-          <form class="card p-2">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Promo code">
-              <div class="input-group-append">
-                <button type="submit" class="btn btn-secondary">Redeem</button>
-              </div>
-            </div>
-          </form>
         </div>
-        <div class="col-md-8 order-md-1">
-          <h4 class="mb-3">Form Registrasi</h4>
-          <form class="needs-validation" novalidate>
+<!--info end-->
+
+<div class="col-md-8 order-md-1">
+  <h4 class="mb-3">Form Registrasi</h4>
+
+  <?php
+  if(isset($_POST['daftar']))
+  {
+    $nama = $_POST['nama'];
+    $password = $_POST['password'];
+    $email = $_POST['email'];
+    $alamat = $_POST['alamat'];
+    $nohp = $_POST['nohp'];
+    
+    if ((empty($nama) === true) || (empty($password) === true) || (empty($email) === true) || (empty($alamat) === true) || (empty($nohp) === true))
+    { 
+      echo "<div class='danger'> Tolong isi semua data dengan benar </div>";
+    }
+    else 
+  {
+    $security = md5($password);
+    $sql = mysqli_query($conn,"INSERT INTO member (email,nama,alamat,nohp,password) VALUES ('$email','$nama','$alamat','$nohp','$security')");
+    echo "<div class='success'>Create data success.</div>";
+  }
+  }
+  ?>
+
+
+          <form action="<?php $_SERVER['PHP_SELF'];?>" method="post" class="needs-validation" novalidate>
             
 
             <div class="mb-3">
               <label for="email">Nama</label>
-              <input type="" class="form-control" id="name" placeholder="" value="" required>
+              <input type="" class="form-control" id="name" name="nama" placeholder="" value="" required>
               <div class="invalid-feedback">
                 Valid name is required.
               </div>
@@ -139,15 +124,15 @@
 
             <div class="mb-3">
               <label for="password">Password</label>
-              <input type="password" class="form-control" id="name" placeholder="" value="" required>
+              <input type="password" class="form-control" id="name" name="password" placeholder="" value="" required>
               <div class="invalid-feedback">
-                Valid name is required.
+                Valid password is required.
               </div>
             </div>
 
             <div class="mb-3">
               <label for="email">Email <!--<span class="text-muted">(Optional)</span>--></label>
-              <input type="email" class="form-control" id="email" placeholder="you@example.com" required>
+              <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
               <div class="invalid-feedback">
                 Please enter a valid email address for shipping updates.
               </div>
@@ -155,7 +140,7 @@
 
             <div class="mb-3">
               <label for="address">Alamat</label>
-              <input type="text" class="form-control" id="address" placeholder="" required>
+              <input type="text" class="form-control" id="address" name="alamat" placeholder="" required>
               <div class="invalid-feedback">
                 Please enter your address.
               </div>
@@ -163,7 +148,7 @@
 
             <div class="mb-3">
               <label for="email">Ponsel</label>
-              <input type="" class="form-control" id="name" placeholder="+62" value="" required>
+              <input type="" class="form-control" id="name" name="nohp" placeholder="+62" value="" required>
               <div class="invalid-feedback">
                 Valid ponsel is required.
               </div>
@@ -175,7 +160,7 @@
                 <a class="btn btn-secondary btn-lg" href="members.php" role="button" >Back</a>
               </div>
               <div class="col-md-6 mb-3">
-                <button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>
+                <button class="btn btn-primary btn-lg btn-block" name="daftar" type="submit">Submit</button>
               </div>
             </div>   
           </form>
@@ -188,9 +173,9 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-    <script src="assets/js/vendor/popper.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="../assets/js/vendor/popper.min.js"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
 
     <!-- Icons -->
     <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>

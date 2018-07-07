@@ -313,6 +313,6 @@ button, input, optgroup, select, textarea {
 }
 
 .sml select{
-  width: 20px;
-  font-size: 5px;
+  width: 50px;
+  font-size: 15px;
 }
