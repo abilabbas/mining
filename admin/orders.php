@@ -1,32 +1,6 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="assets/img/favicon.png">
+<?php include "header.php";?>
 
-    <title>Members - DoorjekAnalytic</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <!--<link href="https://bootstrap-themes.github.io/dashboard/assets/css/toolkit-light.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="dashboard.css" rel="stylesheet">
-  </head>
-
-  <body>
-    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="index.php"><img src="assets/img/logo.png"><small>Analytic</small></a>
-      
-      <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-          <a class="nav-link" href="#">Sign out</a>
-        </li>
-      </ul>
-    </nav>
 
     <div class="container-fluid">
       <div class="row">
@@ -40,13 +14,13 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="orders.php">
+                <a class="nav-link active" href="orders.php">
                   <span data-feather="file"></span>
                   Orders
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="members.php">
+                <a class="nav-link" href="members.php">
                   <span data-feather="users"></span>
                   Members
                 </a>
@@ -65,7 +39,7 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-            <h1 class="h2">Members</h1>
+            <h1 class="h2">Orders</h1>
             <div class="btn-toolbar mb-2 mb-md-0">
               <div class="btn-group mr-2">
                 <button class="btn btn-sm btn-outline-secondary">Share</button>
@@ -84,13 +58,13 @@
       <div class="ago">
         <span class="bpi"><b>MEMBERS</b></span>
         <h2 class="bph">
-          320
+         <?php echo $jumlahmember ; ?>
           <small class="bpj bpk">5% </small>
 
         </h2>
         <hr class="bpr aei">
       </div>
-      <img src="assets/img/download1.png">
+      <img src="../assets/img/download1.png">
     </div>
   </div>
   <div class="eq fp afd amk asi">
@@ -103,7 +77,7 @@
         </h2>
         <hr class="bpr aei">
       </div>
-      <img src="assets/img/download2.png">
+      <img src="../assets/img/download2.png">
     </div>
   </div>
   <div class="eq fp afd amk asi">
@@ -116,7 +90,7 @@
         </h2>
         <hr class="bpr aei">
       </div>
-      <img src="assets/img/download3.png">
+      <img src="../assets/img/download3.png">
     </div>
   </div>
   <div class="eq fp afd amk asi">
@@ -129,140 +103,166 @@
         </h2>
         <hr class="bpr aei">
       </div>
-      <img src="assets/img/download4.png">
+      <img src="../assets/img/download4.png">
     </div>
   </div>
 </div>
 <!--  -->
 <div class="row flex-nowrap justify-content-between align-items-center">
           <div class="col-4 pt-1">
-            <a class="text-muted" href="addmember.php">Add</a>
+            <a class="text-muted" href="addorder.php">Add Order</a>
           </div>
           <div class="col-4 text-center">
-            <div class="sml">
-            <select class="form-control form-control-sm">
-                 <option>10</option>
-                 <option>1</option>
-                 <option>2</option>
-            </select>
-            </div>
+            <a class="blog-header-logo text-dark" href="#">Large</a>
           </div>
-          <div class="col-4 d-flex justify-content-end align-items-center">
+          <form action="<?php $_SERVER['PHP_SELF'];?>" method="get" class="col-4 d-flex justify-content-end align-items-center">
             <a class="text-muted" href="#">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-3"><circle cx="10.5" cy="10.5" r="7.5"></circle><line x1="21" y1="21" x2="15.8" y2="15.8"></line></svg>
             </a>
-            <input type="text" class="form-control bsx" placeholder="Search members">
-          </div>
-        </div>
+            <input type="text" class="form-control bsx" name="search" placeholder="Search orders">
+          </form>
+</div>
 
 
 
-          <h4>Table Members</h4>
+          <h4>Table Orders</h4>
           <div class="table-responsive">
             <table class="table table-striped table-sm">
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>Id User</th>
-                  <th>Nama</th>
-                  <th>Email</th>
-                  <th>Alamat</th>
-                  <th>Ponsel</th>
+                  <th>Id Order</th>
+                  <th>Time</th>
+                  <th>When</th>
+                  <th>User</th>
+                  <th>Map</th>
+                  <th>Total</th>
+                  <th>Tipe</th>
+                  <th>Status</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>1</td>
-                  <td>142264752</td>
-                  <td>Abil Abbas Habibi</td>
-                  <td>abilabbas11@gmail.com</td>
+                  <td>152264752</td>
+                  <td>24/04/2017</td>
+                  <td>25/04/2017</td>
+                  <td>Cindy</td>
                   <td>Jl. Bangau Sei Mencirim II Medan Petisah Kota Medan</td>
-                  <td>08123242746</td>
-                  <td><a href="detailmember.php" class="badge badge-info">Detail</a> <a href="editmember.php" class="badge badge-secondary">Edit</a> <a href="#" class="badge badge-danger">Delete</a></td>
+                  <td>Rp. 560.000</td>
+                  <td>Doormobil</td>
+                  <td><span class="badge badge-success">Success</span></td>
+                  <td><a href="detailorder.php" class="badge badge-info">Detail</a> <a href="#" class="badge badge-danger">Delete</a></td>
                 </tr>
                 <tr>
                   <td>2</td>
-                  <td>142264752</td>
-                  <td>Abil Abbas Habibi</td>
-                  <td>abilabbas11@gmail.com</td>
+                  <td>152264752</td>
+                  <td>24/04/2017</td>
+                  <td>25/04/2017</td>
+                  <td>Cindy</td>
                   <td>Jl. Bangau Sei Mencirim II Medan Petisah Kota Medan</td>
-                  <td>08123242746</td>
-                  <td><a href="detailmember.php" class="badge badge-info">Detail</a> <a href="editmember.php" class="badge badge-secondary">Edit</a> <a href="#" class="badge badge-danger">Delete</a></td>
+                  <td>Rp. 560.000</td>
+                  <td>Doormobil</td>
+                  <td><span class="badge badge-success">Success</span></td>
+                  <td><a href="detailorder.php" class="badge badge-info">Detail</a> <a href="#" class="badge badge-danger">Delete</a></td>
                 </tr>
                 <tr>
                   <td>3</td>
-                  <td>142264752</td>
-                  <td>Abil Abbas Habibi</td>
-                  <td>abilabbas11@gmail.com</td>
+                  <td>152264752</td>
+                  <td>24/04/2017</td>
+                  <td>25/04/2017</td>
+                  <td>Cindy</td>
                   <td>Jl. Bangau Sei Mencirim II Medan Petisah Kota Medan</td>
-                  <td>08123242746</td>
-                  <td><a href="detailmember.php" class="badge badge-info">Detail</a> <a href="editmember.php" class="badge badge-secondary">Edit</a> <a href="#" class="badge badge-danger">Delete</a></td>
+                  <td>Rp. 560.000</td>
+                  <td>Doormobil</td>
+                  <td><span class="badge badge-danger">Cancel</span></td>
+                  <td><a href="detailorder.php" class="badge badge-info">Detail</a> <a href="#" class="badge badge-danger">Delete</a></td>
                 </tr>
                 <tr>
                   <td>4</td>
-                  <td>142264752</td>
-                  <td>Abil Abbas Habibi</td>
-                  <td>abilabbas11@gmail.com</td>
+                  <td>152264752</td>
+                  <td>24/04/2017</td>
+                  <td>25/04/2017</td>
+                  <td>Cindy</td>
                   <td>Jl. Bangau Sei Mencirim II Medan Petisah Kota Medan</td>
-                  <td>08123242746</td>
-                  <td><a href="detailmember.php" class="badge badge-info">Detail</a> <a href="editmember.php" class="badge badge-secondary">Edit</a> <a href="#" class="badge badge-danger">Delete</a></td>
+                  <td>Rp. 560.000</td>
+                  <td>Doormobil</td>
+                  <td><span class="badge badge-success">Success</span></td>
+                  <td><a href="detailorder.php" class="badge badge-info">Detail</a> <a href="#" class="badge badge-danger">Delete</a></td>
                 </tr>
                 <tr>
                   <td>5</td>
-                  <td>142264752</td>
-                  <td>Abil Abbas Habibi</td>
-                  <td>abilabbas11@gmail.com</td>
+                  <td>152264752</td>
+                  <td>24/04/2017</td>
+                  <td>25/04/2017</td>
+                  <td>Cindy</td>
                   <td>Jl. Bangau Sei Mencirim II Medan Petisah Kota Medan</td>
-                  <td>08123242746</td>
-                  <td><a href="detailmember.php" class="badge badge-info">Detail</a> <a href="editmember.php" class="badge badge-secondary">Edit</a> <a href="#" class="badge badge-danger">Delete</a></td>
+                  <td>Rp. 560.000</td>
+                  <td>Doormobil</td>
+                  <td><span class="badge badge-success">Success</span></td>
+                  <td><a href="detailorder.php" class="badge badge-info">Detail</a> <a href="#" class="badge badge-danger">Delete</a></td>
                 </tr>
                 <tr>
                   <td>6</td>
-                  <td>142264752</td>
-                  <td>Abil Abbas Habibi</td>
-                  <td>abilabbas11@gmail.com</td>
+                  <td>152264752</td>
+                  <td>24/04/2017</td>
+                  <td>25/04/2017</td>
+                  <td>Cindy</td>
                   <td>Jl. Bangau Sei Mencirim II Medan Petisah Kota Medan</td>
-                  <td>08123242746</td>
-                  <td><a href="detailmember.php" class="badge badge-info">Detail</a> <a href="editmember.php" class="badge badge-secondary">Edit</a> <a href="#" class="badge badge-danger">Delete</a></td>
+                  <td>Rp. 560.000</td>
+                  <td>Doormobil</td>
+                  <td><span class="badge badge-danger">Cancel</span></td>
+                  <td><a href="detailorder.php" class="badge badge-info">Detail</a> <a href="#" class="badge badge-danger">Delete</a></td>
                 </tr>
                 <tr>
                   <td>7</td>
-                  <td>142264752</td>
-                  <td>Abil Abbas Habibi</td>
-                  <td>abilabbas11@gmail.com</td>
+                  <td>152264752</td>
+                  <td>24/04/2017</td>
+                  <td>25/04/2017</td>
+                  <td>Cindy</td>
                   <td>Jl. Bangau Sei Mencirim II Medan Petisah Kota Medan</td>
-                  <td>08123242746</td>
-                  <td><a href="detailmember.php" class="badge badge-info">Detail</a> <a href="editmember.php" class="badge badge-secondary">Edit</a> <a href="#" class="badge badge-danger">Delete</a></td>
+                  <td>Rp. 560.000</td>
+                  <td>Doormobil</td>
+                  <td><span class="badge badge-success">Success</span></td>
+                  <td><a href="detailorder.php" class="badge badge-info">Detail</a> <a href="#" class="badge badge-danger">Delete</a></td>
                 </tr>
                 <tr>
                   <td>8</td>
-                  <td>142264752</td>
-                  <td>Abil Abbas Habibi</td>
-                  <td>abilabbas11@gmail.com</td>
+                  <td>152264752</td>
+                  <td>24/04/2017</td>
+                  <td>25/04/2017</td>
+                  <td>Cindy</td>
                   <td>Jl. Bangau Sei Mencirim II Medan Petisah Kota Medan</td>
-                  <td>08123242746</td>
-                  <td><a href="detailmember.php" class="badge badge-info">Detail</a> <a href="editmember.php" class="badge badge-secondary">Edit</a> <a href="#" class="badge badge-danger">Delete</a></td>
+                  <td>Rp. 560.000</td>
+                  <td>Doormobil</td>
+                  <td><span class="badge badge-success">Success</span></td>
+                  <td><a href="detailorder.php" class="badge badge-info">Detail</a> <a href="#" class="badge badge-danger">Delete</a></td>
                 </tr>
                 <tr>
                   <td>9</td>
-                  <td>142264752</td>
-                  <td>Abil Abbas Habibi</td>
-                  <td>abilabbas11@gmail.com</td>
+                  <td>152264752</td>
+                  <td>24/04/2017</td>
+                  <td>25/04/2017</td>
+                  <td>Cindy</td>
                   <td>Jl. Bangau Sei Mencirim II Medan Petisah Kota Medan</td>
-                  <td>08123242746</td>
-                  <td><a href="detailmember.php" class="badge badge-info">Detail</a> <a href="editmember.php" class="badge badge-secondary">Edit</a> <a href="#" class="badge badge-danger">Delete</a></td>
+                  <td>Rp. 560.000</td>
+                  <td>Doormobil</td>
+                  <td><span class="badge badge-success">Success</span></td>
+                  <td><a href="detailorder.php" class="badge badge-info">Detail</a> <a href="#" class="badge badge-danger">Delete</a></td>
                 </tr>
                 <tr>
                   <td>10</td>
-                  <td>142264752</td>
-                  <td>Abil Abbas Habibi</td>
-                  <td>abilabbas11@gmail.com</td>
+                  <td>152264752</td>
+                  <td>24/04/2017</td>
+                  <td>25/04/2017</td>
+                  <td>Cindy</td>
                   <td>Jl. Bangau Sei Mencirim II Medan Petisah Kota Medan</td>
-                  <td>08123242746</td>
-                  <td><a href="detailmember.php" class="badge badge-info">Detail</a> <a href="editmember.php" class="badge badge-secondary">Edit</a> <a href="#" class="badge badge-danger">Delete</a></td>
+                  <td>Rp. 560.000</td>
+                  <td>Doormobil</td>
+                  <td><span class="badge badge-success">Success</span></td>
+                  <td><a href="detailorder.php" class="badge badge-info">Detail</a> <a href="#" class="badge badge-danger">Delete</a></td>
                 </tr>
-                
               </tbody>
             </table>
 
@@ -286,6 +286,7 @@
     </li>
   </ul>
 </nav>
+</div>
 
         </main>
       </div>
@@ -295,9 +296,9 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-    <script src="assets/js/vendor/popper.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="../assets/js/vendor/popper.min.js"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
 
     <!-- Icons -->
     <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
