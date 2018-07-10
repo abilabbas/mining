@@ -1,3 +1,4 @@
+<?php require_once("auth.php"); ?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -18,6 +19,7 @@
   </head>
 
   <body>
+
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
       <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="index.php"><img src="assets/img/logo.png"><small>Analytic</small></a>
       
