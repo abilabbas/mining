@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 /**
 *Nama File : Config.php
 *File ini berisi beberapa data penting seperti
@@ -21,3 +22,22 @@ try
 	//tampilan eror
 	die("Terjadi masalah: " . $e->getMessage());
 }
+=======
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = 'doorjekanalytic';
+
+// Create connection
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+
+
+// Check connection
+if ($conn === false) {
+    die("Connection failed: " . mysqli_connect_error());
+} 
+
+?>
+
+
+>>>>>>> master

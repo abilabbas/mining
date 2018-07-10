@@ -1,32 +1,6 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="assets/img/favicon.png">
+<?php include "header.php";?>
 
-    <title>Members - DoorjekAnalytic</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <!--<link href="https://bootstrap-themes.github.io/dashboard/assets/css/toolkit-light.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="dashboard.css" rel="stylesheet">
-  </head>
-
-  <body>
-    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="index.php"><img src="assets/img/logo.png"><small>Analytic</small></a>
-      
-      <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-          <a class="nav-link" href="#">Sign out</a>
-        </li>
-      </ul>
-    </nav>
 
     <div class="container-fluid">
       <div class="row">
@@ -84,13 +58,14 @@
       <div class="ago">
         <span class="bpi"><b>MEMBERS</b></span>
         <h2 class="bph">
-          320
+          <?php echo $jumlahmember ; ?>
+
           <small class="bpj bpk">5% </small>
 
         </h2>
         <hr class="bpr aei">
       </div>
-      <img src="assets/img/download1.png">
+      <img src="../assets/img/download1.png">
     </div>
   </div>
   <div class="eq fp afd amk asi">
@@ -103,7 +78,7 @@
         </h2>
         <hr class="bpr aei">
       </div>
-      <img src="assets/img/download2.png">
+      <img src="../assets/img/download2.png">
     </div>
   </div>
   <div class="eq fp afd amk asi">
@@ -116,7 +91,7 @@
         </h2>
         <hr class="bpr aei">
       </div>
-      <img src="assets/img/download3.png">
+      <img src="../assets/img/download3.png">
     </div>
   </div>
   <div class="eq fp afd amk asi">
@@ -129,35 +104,29 @@
         </h2>
         <hr class="bpr aei">
       </div>
-      <img src="assets/img/download4.png">
+      <img src="../assets/img/download4.png">
     </div>
   </div>
 </div>
 <!--  -->
+
 <div class="row flex-nowrap justify-content-between align-items-center">
           <div class="col-4 pt-1">
-            <a class="text-muted" href="addmember.php">Add</a>
+            <a class="text-muted" href="addmember.php">Add Member</a>
           </div>
           <div class="col-4 text-center">
-            <div class="sml">
-            <select class="form-control form-control-sm">
-                 <option>10</option>
-                 <option>1</option>
-                 <option>2</option>
-            </select>
-            </div>
+            <a class="blog-header-logo text-dark" href="#">Large</a>
           </div>
-          <div class="col-4 d-flex justify-content-end align-items-center">
+          <form action="<?php $_SERVER['PHP_SELF'];?>" method="get" class="col-4 d-flex justify-content-end align-items-center">
             <a class="text-muted" href="#">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-3"><circle cx="10.5" cy="10.5" r="7.5"></circle><line x1="21" y1="21" x2="15.8" y2="15.8"></line></svg>
             </a>
-            <input type="text" class="form-control bsx" placeholder="Search members">
-          </div>
-        </div>
+            <input type="text" class="form-control bsx" name="search" placeholder="Search members">
+          </form>
+</div>
 
-
-
-          <h4>Table Members</h4>
+        
+        <h4>Table Members</h4>
           <div class="table-responsive">
             <table class="table table-striped table-sm">
               <thead>
@@ -171,105 +140,66 @@
                   <th>Action</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>142264752</td>
-                  <td>Abil Abbas Habibi</td>
-                  <td>abilabbas11@gmail.com</td>
-                  <td>Jl. Bangau Sei Mencirim II Medan Petisah Kota Medan</td>
-                  <td>08123242746</td>
-                  <td><a href="detailmember.php" class="badge badge-info">Detail</a> <a href="editmember.php" class="badge badge-secondary">Edit</a> <a href="#" class="badge badge-danger">Delete</a></td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>142264752</td>
-                  <td>Abil Abbas Habibi</td>
-                  <td>abilabbas11@gmail.com</td>
-                  <td>Jl. Bangau Sei Mencirim II Medan Petisah Kota Medan</td>
-                  <td>08123242746</td>
-                  <td><a href="detailmember.php" class="badge badge-info">Detail</a> <a href="editmember.php" class="badge badge-secondary">Edit</a> <a href="#" class="badge badge-danger">Delete</a></td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>142264752</td>
-                  <td>Abil Abbas Habibi</td>
-                  <td>abilabbas11@gmail.com</td>
-                  <td>Jl. Bangau Sei Mencirim II Medan Petisah Kota Medan</td>
-                  <td>08123242746</td>
-                  <td><a href="detailmember.php" class="badge badge-info">Detail</a> <a href="editmember.php" class="badge badge-secondary">Edit</a> <a href="#" class="badge badge-danger">Delete</a></td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>142264752</td>
-                  <td>Abil Abbas Habibi</td>
-                  <td>abilabbas11@gmail.com</td>
-                  <td>Jl. Bangau Sei Mencirim II Medan Petisah Kota Medan</td>
-                  <td>08123242746</td>
-                  <td><a href="detailmember.php" class="badge badge-info">Detail</a> <a href="editmember.php" class="badge badge-secondary">Edit</a> <a href="#" class="badge badge-danger">Delete</a></td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td>142264752</td>
-                  <td>Abil Abbas Habibi</td>
-                  <td>abilabbas11@gmail.com</td>
-                  <td>Jl. Bangau Sei Mencirim II Medan Petisah Kota Medan</td>
-                  <td>08123242746</td>
-                  <td><a href="detailmember.php" class="badge badge-info">Detail</a> <a href="editmember.php" class="badge badge-secondary">Edit</a> <a href="#" class="badge badge-danger">Delete</a></td>
-                </tr>
-                <tr>
-                  <td>6</td>
-                  <td>142264752</td>
-                  <td>Abil Abbas Habibi</td>
-                  <td>abilabbas11@gmail.com</td>
-                  <td>Jl. Bangau Sei Mencirim II Medan Petisah Kota Medan</td>
-                  <td>08123242746</td>
-                  <td><a href="detailmember.php" class="badge badge-info">Detail</a> <a href="editmember.php" class="badge badge-secondary">Edit</a> <a href="#" class="badge badge-danger">Delete</a></td>
-                </tr>
-                <tr>
-                  <td>7</td>
-                  <td>142264752</td>
-                  <td>Abil Abbas Habibi</td>
-                  <td>abilabbas11@gmail.com</td>
-                  <td>Jl. Bangau Sei Mencirim II Medan Petisah Kota Medan</td>
-                  <td>08123242746</td>
-                  <td><a href="detailmember.php" class="badge badge-info">Detail</a> <a href="editmember.php" class="badge badge-secondary">Edit</a> <a href="#" class="badge badge-danger">Delete</a></td>
-                </tr>
-                <tr>
-                  <td>8</td>
-                  <td>142264752</td>
-                  <td>Abil Abbas Habibi</td>
-                  <td>abilabbas11@gmail.com</td>
-                  <td>Jl. Bangau Sei Mencirim II Medan Petisah Kota Medan</td>
-                  <td>08123242746</td>
-                  <td><a href="detailmember.php" class="badge badge-info">Detail</a> <a href="editmember.php" class="badge badge-secondary">Edit</a> <a href="#" class="badge badge-danger">Delete</a></td>
-                </tr>
-                <tr>
-                  <td>9</td>
-                  <td>142264752</td>
-                  <td>Abil Abbas Habibi</td>
-                  <td>abilabbas11@gmail.com</td>
-                  <td>Jl. Bangau Sei Mencirim II Medan Petisah Kota Medan</td>
-                  <td>08123242746</td>
-                  <td><a href="detailmember.php" class="badge badge-info">Detail</a> <a href="editmember.php" class="badge badge-secondary">Edit</a> <a href="#" class="badge badge-danger">Delete</a></td>
-                </tr>
-                <tr>
-                  <td>10</td>
-                  <td>142264752</td>
-                  <td>Abil Abbas Habibi</td>
-                  <td>abilabbas11@gmail.com</td>
-                  <td>Jl. Bangau Sei Mencirim II Medan Petisah Kota Medan</td>
-                  <td>08123242746</td>
-                  <td><a href="detailmember.php" class="badge badge-info">Detail</a> <a href="editmember.php" class="badge badge-secondary">Edit</a> <a href="#" class="badge badge-danger">Delete</a></td>
-                </tr>
+<?php
+
+if(isset($_GET['search']))
+{
+  $codesearch = $_GET['search'];
+  
+  $query = mysqli_query($conn, "SELECT * FROM member WHERE nama LIKE '%$codesearch%' OR email LIKE '%$codesearch%' OR alamat LIKE '%$codesearch%'"); 
+  
+  $jumlahsearch = mysqli_num_rows($query);
+
+  for($i=1; $i<=$jumlahsearch; $i++)
+  while($rows = mysqli_fetch_array($query))
+  {
+  
+                echo '<tbody>';
+                echo '<tr>';
                 
-              </tbody>
+                  echo '<td></td>';
+                  echo '<td>' . $rows['id_member'].'</td>';
+                  echo '<td>' . $rows['nama'].'</td>';
+                  echo '<td>' . $rows['email'].'</td>';
+                  echo '<td>' . $rows['alamat'].'</td>';
+                  echo '<td>' . $rows['nohp'].'</td>';
+                  echo '<td><a href="detailmember.php?code='.$rows["id_member"].'" class="badge badge-info">Detail</a> <a href="editmember.php?update='.$rows['id_member'].'" class="badge badge-secondary">Edit</a> <a href=d_member.php?code='.$rows["id_member"].'" class="badge badge-danger">Delete</a></td>';
+
+                echo '</tr>';
+                
+                
+              echo '</tbody>';
+  }
+}
+
+  while($rows = mysqli_fetch_array($query))
+  { 
+                
+                echo '<tbody>';
+                echo '<tr>';
+                  
+                  echo '<td></td>';
+                  echo '<td>' . $rows['id_member'].'</td>';
+                  echo '<td>' . $rows['nama'].'</td>';
+                  echo '<td>' . $rows['email'].'</td>';
+                  echo '<td>' . $rows['alamat'].'</td>';
+                  echo '<td>' . $rows['nohp'].'</td>';
+                  echo '<td><a href="detailmember.php?code='.$rows["id_member"].'" class="badge badge-info">Detail</a> <a href="editmember.php?update='.$rows['id_member'].'" class="badge badge-secondary">Edit</a> <a href=d_member.php?code='.$rows["id_member"].'" class="badge badge-danger">Delete</a></td>';
+                  
+                echo '</tr>';
+                
+                
+              echo '</tbody>';
+              
+              
+  }
+$jumlahsearch = mysqli_num_rows($query);
+?>
             </table>
-
-
           </div>
+
 <div class="row">
-  <div class="col-12 col-md-8">Showing 1 to 10 of ... entries</div>
+  <div class="col-12 col-md-8">Showing  <?php echo $jumlahsearch ; ?> of  <?php echo $jumlahmember ; ?> entries</div>
   <div class="col-6 col-md-4">
   <nav aria-label="...">
   <ul class="pagination">
