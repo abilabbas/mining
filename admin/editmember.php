@@ -81,19 +81,19 @@ if( mysqli_num_rows($sql) < 1 ){
                 <h6 class="my-0">Doormobil Complete</h6>
                 <div class="text-muted">Brief description</div>
               </div>
-              <span class="text-muted">14</span>
+              <span class="text-muted"><?php echo $jumlahdoormobil; ?></span>
             </li>
             <li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>
                 <h6 class="my-0">Doormotor Complete</h6>
                 <div class="text-muted">Brief description</div>
               </div>
-              <span class="text-muted">20</span>
+              <span class="text-muted"><?php echo $jumlahdoormotor; ?></span>
             </li>
             
             <li class="list-group-item d-flex justify-content-between">
               <span>Total Order</span>
-              <strong>87</strong>
+              <strong><?php echo $jumlahorder ; ?></strong>
             </li>
           </ul>
         </div>
@@ -127,14 +127,7 @@ if( mysqli_num_rows($sql) < 1 ){
           </div>
         </div>
 
-        <div class="form-group row">
-          <label for="staticEmail" class="col-sm-2 col-form-label">Alamat</label>
-          <div class="col-sm-10">
-          
-            <input type="text" id="disabledTextInput" name="alamat" class="form-control" placeholder="alamat" value="<?php echo $member['alamat'] ?>">
-          
-          </div>
-        </div>
+        
 
         <div class="form-group row">
           <label for="staticEmail" class="col-sm-2 col-form-label">Ponsel</label>
@@ -144,7 +137,7 @@ if( mysqli_num_rows($sql) < 1 ){
          
           </div>
         </div>
-
+<hr>
         <div class="form-group row">
       
         </div>

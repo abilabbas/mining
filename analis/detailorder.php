@@ -1,23 +1,23 @@
 <?php include "header.php";?>
-
 <?php 
  
 include("../config.php"); 
  
 // kalau tidak ada id di query string 
 if( !isset($_GET['code']) ){     
-  header('Location: members.php'); } 
+  header('Location: orders.php'); } 
  
 //ambil id dari query string 
   $code = $_GET['code']; 
  
 // buat query untuk ambil data dari database 
-  $sql = "SELECT * FROM member WHERE id_member=$code"; 
-  $query = mysqli_query($conn, $sql); 
-  $member = mysqli_fetch_assoc($query); 
+
+  $queryorder = mysqli_query($conn, "SELECT * FROM transaksi LEFT JOIN member ON member.id_member = transaksi.id_member LEFT JOIN layanan ON layanan.id_layanan = transaksi.id_layanan LEFT JOIN produk ON produk.id_produk = transaksi.id_produk LEFT JOIN payment ON payment.id_payment = transaksi.id_payment WHERE id_order='$code'");
+  $jumlah = mysqli_num_rows($queryorder);
+  $order = mysqli_fetch_assoc($queryorder);
  
 // jika data yang di-edit tidak ditemukan 
-  if( mysqli_num_rows($query) < 1 ){     
+  if($jumlah < 1 ){     
     die("data tidak ditemukan..."); 
   } 
  
@@ -35,13 +35,13 @@ if( !isset($_GET['code']) ){
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="orders.php">
+                <a class="nav-link active" href="orders.php">
                   <span data-feather="file"></span>
                   Orders
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="members.php">
+                <a class="nav-link" href="members.php">
                   <span data-feather="users"></span>
                   Members
                 </a>
@@ -60,10 +60,10 @@ if( !isset($_GET['code']) ){
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-            <h1 class="h2">Detail Member</h1>
+            <h1 class="h2">Detail Order</h1>
             <div class="btn-toolbar mb-2 mb-md-0">
               <div class="btn-group mr-2">
-                
+                ccccccccccccccc
               </div>
               
             </div>
@@ -105,18 +105,19 @@ if( !isset($_GET['code']) ){
             </li>
           </ul>
         </div>
-<!--info end-->  
+<!--info end--> 
 
         <div class="col-md-8 order-md-1">
-          <h4 class="mb-3">Form Member</h4>
-          <form class="needs-validation" novalidate>
+          <h4 class="mb-3">Detail User</h4>
+          <form action="" method="" class="needs-validation" novalidate>
             
 
+           
         <div class="form-group row">
           <label for="staticEmail" class="col-sm-2 col-form-label">Id User</label>
           <div class="col-sm-10">
           
-            <input type="text" id="disabledTextInput" class="form-control" placeholder="<?php echo $member['id_member'] ?>"readonly>
+            <input type="text" id="disabledTextInput" class="form-control" placeholder="<?php echo $order['id_member'] ?>" readonly>
           
           </div>
         </div>
@@ -125,7 +126,7 @@ if( !isset($_GET['code']) ){
           <label for="staticEmail" class="col-sm-2 col-form-label">Nama</label>
           <div class="col-sm-10">
           
-            <input type="text" id="disabledTextInput" class="form-control" placeholder="<?php echo $member['nama'] ?>" readonly>
+            <input type="text" id="disabledTextInput" class="form-control" placeholder="<?php echo $order['nama'] ?>" readonly>
           
           </div>
         </div>
@@ -134,38 +135,151 @@ if( !isset($_GET['code']) ){
           <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
           <div class="col-sm-10">
           
-            <input type="text" id="disabledTextInput" class="form-control" placeholder="<?php echo $member['email'] ?>" readonly>
+            <input type="text" id="disabledTextInput" class="form-control" placeholder="<?php echo $order['email'] ?>" readonly>
           
           </div>
         </div>
 
-       
+        <div class="form-group row">
+          <label for="staticEmail" class="col-sm-2 col-form-label">Alamat</label>
+          <div class="col-sm-10">
+          
+            <input type="text" id="disabledTextInput" class="form-control" placeholder="<?php echo $order['alamat'] ?>" readonly>
+          
+          </div>
+        </div>
 
         <div class="form-group row">
           <label for="staticEmail" class="col-sm-2 col-form-label">Ponsel</label>
           <div class="col-sm-10">
-          
-            <input type="text" id="disabledTextInput" class="form-control" placeholder="<?php echo $member['nohp'] ?>" readonly>
          
+            <input type="text" id="disabledTextInput" class="form-control" placeholder="<?php echo $order['nohp'] ?>" readonly>
+         
+          </div>
+        </div>
+            
+         <h4 class="mb-3">Detail Status</h4>
+
+         <div class="form-group row">
+          <label for="staticEmail" class="col-sm-2 col-form-label">Status Progres</label>
+          <div class="col-sm-10">
+          <?php
+            if ($order['status'] == 3){
+                    echo '<input type="text" id="disabledTextInput" class="form-control" placeholder="Success" readonly>';
+                  } else {
+                    echo '<input type="text" id="disabledTextInput" class="form-control" placeholder="Cancel" readonly>';
+                  }
+          ?>
+          
           </div>
         </div>
 
         <div class="form-group row">
-      
+          <label for="staticEmail" class="col-sm-2 col-form-label">When</label>
+          <div class="col-sm-10">
+          
+            <input type="text" id="disabledTextInput" class="form-control" placeholder="<?php echo $order['dateorder'] ?>" readonly>
+          
+          </div>
         </div>
 
-       
+        <div class="form-group row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Alamat Order</label>
+                <div class="col-sm-10">   
+                      <textarea name="alamatorder" class="form-control" id="exampleFormControlTextarea1" rows="2" placeholder="<?php echo $order['alamatorder'] ?>" readonly></textarea>
+                </div>
+        </div>
+
+        <h4 class="mb-3">Detail Produk</h4>
+
+         <div class="form-group row">
+          <label for="staticEmail" class="col-sm-2 col-form-label">Nama Produk</label>
+          <div class="col-sm-10">
+         
+            <input type="text" id="disabledTextInput" class="form-control" placeholder="<?php echo $order['produk_name'] ?>" readonly>
+          
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="staticEmail" class="col-sm-2 col-form-label">Pembayaran</label>
+          <div class="col-sm-10">
+          
+            <input type="text" id="disabledTextInput" class="form-control" placeholder="<?php echo $order['payment_name'] ?>" readonly>
+          
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="staticEmail" class="col-sm-2 col-form-label">Kupon</label>
+          <div class="col-sm-10">
+          
+            <input type="text" id="disabledTextInput" class="form-control" placeholder="" readonly>
+          
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="staticEmail" class="col-sm-2 col-form-label">Harga Produk</label>
+          <div class="col-sm-10">
+          
+            <input type="text" id="disabledTextInput" class="form-control" placeholder="Rp. <?php echo $order['produk_price'] ?>" readonly>
+          
+          </div>
+        </div>
+<!--
+        <h4 class="mb-3">Detail Vehicle</h4>
+
+         <div class="form-group row">
+          <label for="staticEmail" class="col-sm-2 col-form-label">Nama Brand</label>
+          <div class="col-sm-10">
+          
+            <input type="text" id="disabledTextInput" class="form-control" placeholder="Jeep" readonly>
+          
+          </div>
+        </div>
+
+         <div class="form-group row">
+          <label for="staticEmail" class="col-sm-2 col-form-label">Model</label>
+          <div class="col-sm-10">
+          
+            <input type="text" id="disabledTextInput" class="form-control" placeholder="Wrangler / Rubicon" readonly>
+         
+          </div>
+        </div>
+
+         <div class="form-group row">
+          <label for="staticEmail" class="col-sm-2 col-form-label">Transmisi</label>
+          <div class="col-sm-10">
+         
+            <input type="text" id="disabledTextInput" class="form-control" placeholder="Automatic" readonly>
+          
+          </div>
+        </div>
+
+         <div class="form-group row">
+          <label for="staticEmail" class="col-sm-2 col-form-label">Tahun</label>
+          <div class="col-sm-10">
+          
+            <input type="text" id="disabledTextInput" class="form-control" placeholder=">2016" readonly>
+          
+          </div>
+        </div>
+-->
+        <div class="form-group row">
+      
+        </div>
             <div class="row">
 
               <div class="col-md-6 mb-3">
-                <a class="btn btn-dark btn-lg" href="members.php" role="button" >Back</a>
-                <?php echo '<a href="editmember.php?update='.$member['id_member'].'" class="btn btn-info btn-lg"  role="button" >Edit</a>'; ?>
+                <a class="btn btn-dark btn-lg" href="orders.php" role="button" >Back</a>
                 
               </div>
               <div class="col-md-6 mb-3">
                 
               </div>
             </div>   
+
           </form>
         </div>
       </div>

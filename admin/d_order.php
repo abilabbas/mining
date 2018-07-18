@@ -8,12 +8,11 @@ if(isset($_GET['code']) ){
     $code = $_GET['code']; 
  
     // buat query hapus     
-    $sql = mysqli_query($conn,"DELETE FROM member WHERE id_member='$code'");     
+    $sql = mysqli_query($conn,"DELETE FROM transaksi WHERE id_order='$code'");     
  
     // apakah query hapus berhasil?     
     if( $sql ){         
-    	header('Location: members.php');  
-        echo "Data berhasil dihapus";   
+    	header('Location: orders.php');     
     } else {         
     	die("gagal menghapus...");     } 
  

@@ -7,6 +7,7 @@ $jumlah = mysqli_num_rows($queryorder);
 
 
 
+
     <div class="container-fluid">
       <div class="row">
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
@@ -177,6 +178,7 @@ if(isset($_POST['caridata']))
  
   $queryorder2 = mysqli_query($conn, "SELECT * FROM transaksi LEFT JOIN member ON member.id_member = transaksi.id_member INNER JOIN layanan ON layanan.id_layanan = transaksi.id_layanan INNER JOIN produk ON produk.id_produk = transaksi.id_produk  WHERE dateorder between '$tglawal' AND '$tglakhir' ORDER BY transaksi.dateorder"); 
   
+  $jumlahsearch = mysqli_num_rows($queryorder2);
 
   while($order = mysqli_fetch_array($queryorder2))
   {
@@ -199,16 +201,15 @@ if(isset($_POST['caridata']))
                   } else {
                     echo '<td><span class="badge badge-danger">Cancel</span></td>';
                   }
-                  echo '<td><a href="detailorder.php?code='.$order["id_order"].'" class="badge badge-info">Detail</a> <a href="editorder.php?editorder='.$order['id_order'].'" class="badge badge-secondary">Edit</a> <a href=d_order.php?code='.$order["id_order"].'" class="badge badge-danger">Delete</a></td>';
+                  
+                  echo '<td><a href="detailorder.php?code='.$order["id_order"].'" class="badge badge-info">Detail</a></td>';
 
                 echo '</tr>';
                 
                 
               echo '</tbody>';
               $i++;
-                $jumlahsearch = $i;
   }
-
 }
 else{
 
@@ -239,7 +240,7 @@ else{
                     echo '<td><span class="badge badge-danger">Cancel</span></td>';
                   }
                   
-                  echo '<td><a href="detailorder.php?code='.$order["id_order"].'" class="badge badge-info">Detail</a> <a href="editorder.php?editorder='.$order['id_order'].'" class="badge badge-secondary">Edit</a> <a href=d_order.php?code='.$order["id_order"].'" class="badge badge-danger">Delete</a></td>';
+                  echo '<td><a href="detailorder.php?code='.$order["id_order"].'" class="badge badge-info">Detail</a> </td>';
 
                 echo '</tr>';
                 

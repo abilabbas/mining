@@ -1,5 +1,27 @@
 <?php include "header.php";?>
 
+<?php 
+ 
+include("../config.php"); 
+ 
+// kalau tidak ada id di query string 
+if( !isset($_GET['code']) ){     
+  header('Location: members.php'); } 
+ 
+//ambil id dari query string 
+  $code = $_GET['code']; 
+ 
+// buat query untuk ambil data dari database 
+  $sql = "SELECT * FROM member WHERE id_member=$code"; 
+  $query = mysqli_query($conn, $sql); 
+  $member = mysqli_fetch_assoc($query); 
+ 
+// jika data yang di-edit tidak ditemukan 
+  if( mysqli_num_rows($query) < 1 ){     
+    die("data tidak ditemukan..."); 
+  } 
+ 
+?> 
 
     <div class="container-fluid">
       <div class="row">
@@ -38,7 +60,7 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-            <h1 class="h2">Add Member</h1>
+            <h1 class="h2">Detail Member</h1>
             <div class="btn-toolbar mb-2 mb-md-0">
               <div class="btn-group mr-2">
                 ccccccccccccccc
@@ -83,77 +105,72 @@
             </li>
           </ul>
         </div>
-<!--info end-->
+<!--info end-->  
 
-<div class="col-md-8 order-md-1">
-  <h4 class="mb-3">Form Registrasi</h4>
-
-  <?php
-  if(isset($_POST['daftar']))
-  {
-    $nama = $_POST['nama'];
-    $password = $_POST['password'];
-    $email = $_POST['email'];
-    $nohp = $_POST['nohp'];
-    
-    if ((empty($nama) === true) || (empty($password) === true) || (empty($email) === true) ||  (empty($nohp) === true))
-    { 
-      echo "<div class='alert alert-danger' role='alert'>Tolong Isi Semua Data Dengan Benar</div>";
-    }
-    else 
-  {
-    $security = md5($password);
-    $sql = mysqli_query($conn,"INSERT INTO member (email,nama,nohp,password) VALUES ('$email','$nama','$nohp','$security')");
-    echo "<div class='alert alert-success' role='alert'>Data berhasil diinput</div>";
-  }
-  }
-  ?>
-
-
-          <form action="<?php $_SERVER['PHP_SELF'];?>" method="post" class="needs-validation" novalidate>
+        <div class="col-md-8 order-md-1">
+          <h4 class="mb-3">Form Member</h4>
+          <form class="needs-validation" novalidate>
             
 
-            <div class="mb-3">
-              <label for="email">Nama</label>
-              <input type="" class="form-control" id="name" name="nama" placeholder="" value="" required>
-              <div class="invalid-feedback">
-                Valid name is required.
-              </div>
-            </div>
+        <div class="form-group row">
+          <label for="staticEmail" class="col-sm-2 col-form-label">Id User</label>
+          <div class="col-sm-10">
+          
+            <input type="text" id="disabledTextInput" class="form-control" placeholder="<?php echo $member['id_member'] ?>"readonly>
+          
+          </div>
+        </div>
 
-            <div class="mb-3">
-              <label for="password">Password</label>
-              <input type="password" class="form-control" id="name" name="password" placeholder="" value="" required>
-              <div class="invalid-feedback">
-                Valid password is required.
-              </div>
-            </div>
+        <div class="form-group row">
+          <label for="staticEmail" class="col-sm-2 col-form-label">Nama</label>
+          <div class="col-sm-10">
+          
+            <input type="text" id="disabledTextInput" class="form-control" placeholder="<?php echo $member['nama'] ?>" readonly>
+          
+          </div>
+        </div>
 
-            <div class="mb-3">
-              <label for="email">Email <!--<span class="text-muted">(Optional)</span>--></label>
-              <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
-              <div class="invalid-feedback">
-                Please enter a valid email address for shipping updates.
-              </div>
-            </div>
+        <div class="form-group row">
+          <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+          <div class="col-sm-10">
+          
+            <input type="text" id="disabledTextInput" class="form-control" placeholder="<?php echo $member['email'] ?>" readonly>
+          
+          </div>
+        </div>
 
-                    
+        <div class="form-group row">
+          <label for="staticEmail" class="col-sm-2 col-form-label">Alamat</label>
+          <div class="col-sm-10">
+          
+            <input type="text" id="disabledTextInput" class="form-control" placeholder="<?php echo $member['alamat'] ?>" readonly>
+          
+          </div>
+        </div>
 
-            <div class="mb-3">
-              <label for="email">Ponsel</label>
-              <input type="" class="form-control" id="name" name="nohp" placeholder="+62" value="" required>
-              <div class="invalid-feedback">
-                Valid ponsel is required.
-              </div>
-            </div>
+        <div class="form-group row">
+          <label for="staticEmail" class="col-sm-2 col-form-label">Ponsel</label>
+          <div class="col-sm-10">
+          
+            <input type="text" id="disabledTextInput" class="form-control" placeholder="<?php echo $member['nohp'] ?>" readonly>
+         
+          </div>
+        </div>
 
+        <div class="form-group row">
+      
+        </div>
+
+       
             <div class="row">
 
               <div class="col-md-6 mb-3">
-                <a class="btn btn-secondary btn-lg" href="members.php" role="button" >Back</a>
+                <a class="btn btn-dark btn-lg" href="members.php" role="button" >Back</a>
+               
+                
               </div>
               <div class="col-md-6 mb-3">
-                <button class="btn btn-primary btn-lg btn-block" name="daftar" type="submit">Submit</button>
+                
               </div>
             </div>   
           </form>

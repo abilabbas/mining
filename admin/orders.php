@@ -1,5 +1,9 @@
 <?php include "header.php";?>
-
+<?php
+$limit = 10;
+$queryorder = mysqli_query($conn, "SELECT * FROM transaksi LEFT JOIN member ON member.id_member = transaksi.id_member INNER JOIN layanan ON layanan.id_layanan = transaksi.id_layanan INNER JOIN produk ON produk.id_produk = transaksi.id_produk ORDER BY transaksi.id_order LIMIT  $limit");
+$jumlah = mysqli_num_rows($queryorder);
+?>
 
 
     <div class="container-fluid">
@@ -42,8 +46,8 @@
             <h1 class="h2">Orders</h1>
             <div class="btn-toolbar mb-2 mb-md-0">
               <div class="btn-group mr-2">
-                <button class="btn btn-sm btn-outline-secondary">Share</button>
-                <button class="btn btn-sm btn-outline-secondary">Export</button>
+                <!--<button class="btn btn-sm btn-outline-secondary">Share</button>-->
+                <!--<button class="btn btn-sm btn-outline-secondary">Export</button>-->
               </div>
               
             </div>
@@ -59,7 +63,13 @@
         <span class="bpi"><b>MEMBERS</b></span>
         <h2 class="bph">
          <?php echo $jumlahmember ; ?>
-          <small class="bpj bpk">5% </small>
+          <small class="bpj bpk">
+          <?php
+            $persen = $jumlahmember /$jumlahmember;
+            $persen2 = round($persen *100);
+            echo $persen2;
+          ?>%
+          </small>
 
         </h2>
         <hr class="bpr aei">
@@ -72,8 +82,14 @@
       <div class="ago">
         <span class="bpi"><b>DOORMOBIL COMPLETE</b></span>
         <h2 class="bph">
-          90
-          <small class="bpj bpl">1.3%</small>
+          <?php echo $jumlahdoormobil; ?>
+          <small class="bpj bpl">
+            <?php
+            $persen = $jumlahdoormobil /$totaldoormobil;
+            $persen2 = round($persen *100);
+            echo $persen2;
+          ?>%
+          </small>
         </h2>
         <hr class="bpr aei">
       </div>
@@ -85,8 +101,14 @@
       <div class="ago">
         <span class="bpi"><b>DOORMOTOR COMPLETE</b></span>
         <h2 class="bph">
-          14
-          <small class="bpj bpk">6.75%</small>
+          <?php echo $jumlahdoormotor; ?>
+          <small class="bpj bpk">
+          <?php
+            $persen = $jumlahdoormotor /$totaldoormotor;
+            $persen2 = round($persen *100);
+            echo $persen2;
+          ?>%
+          </small>
         </h2>
         <hr class="bpr aei">
       </div>
@@ -98,8 +120,14 @@
       <div class="ago">
         <span class="bpi"><b>TOTAL ORDER</b></span>
         <h2 class="bph">
-          87
-          <small class="bpj bpl">1.3%</small>
+          <?php echo $jumlahorder ; ?>
+          <small class="bpj bpl">
+          <?php
+            $persen = $jumlahorder/$jumlahorder;
+            $persen2 = round($persen *100);
+            echo $persen2;
+          ?>%
+          </small>
         </h2>
         <hr class="bpr aei">
       </div>
@@ -108,12 +136,33 @@
   </div>
 </div>
 <!--  -->
+
 <div class="row flex-nowrap justify-content-between align-items-center">
           <div class="col-4 pt-1">
-            <a class="text-muted" href="pilihmemberorder.php">Add Order</a>
+            <a href="pilihmemberorder.php" ><button class="btn btn-success my-2 my-sm-0">Add Order</button></a>
           </div>
           <div class="col-4 text-center">
-            <a class="blog-header-logo text-dark" href="#">Large</a>
+          <form action="<?php $_SERVER['PHP_SELF'];?>" method="POST">
+
+            
+
+            <div class="input-group col col-lg-6">
+            <select name="maxrows" class="custom-select" id="inputGroupSelect04">
+              <option value="10">10</option>
+              <option value="25">25</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+              <option value="250">250</option>
+              <option value="500">500</option>
+              <option value="<?php echo $jumlahorder; ?>">All</option>
+            </select>
+            <div class="input-group-append">
+              <button name="maxrows2" class="btn btn-outline-secondary" type="submit">Rows</button>
+            </div>
+            </div>
+
+          </form>
+
           </div>
           <form action="<?php $_SERVER['PHP_SELF'];?>" method="get" class="col-4 d-flex justify-content-end align-items-center">
             <a class="text-muted" href="#">
@@ -123,12 +172,21 @@
           </form>
 </div>
 
+<?php
+  
+  if(isset($_POST['maxrows2'])){
+ 
+  $limit = $_POST['maxrows'];
 
-
+  $queryorder = mysqli_query($conn, "SELECT * FROM transaksi LEFT JOIN member ON member.id_member = transaksi.id_member INNER JOIN layanan ON layanan.id_layanan = transaksi.id_layanan INNER JOIN produk ON produk.id_produk = transaksi.id_produk ORDER BY transaksi.id_order LIMIT  $limit");
+  //$queryorder = mysqli_query($conn, "SELECT * FROM transaksi LEFT JOIN member ON member.id_member = transaksi.id_member INNER JOIN layanan ON layanan.id_layanan = transaksi.id_layanan INNER JOIN produk ON produk.id_produk = transaksi.id_produk ORDER BY transaksi.id_order ");
+}
+?>
+<br>
           <h4>Table Orders</h4>
           <div class="table-responsive">
-            <table class="table table-striped table-sm">
-              <thead>
+            <table class="table table-hover ">
+              <thead class="">
                 <tr>
                   <th>No</th>
                   <th>Id Order</th>
@@ -142,134 +200,97 @@
                   <th>Action</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>152264752</td>
-                  <td>24/04/2017</td>
-                  <td>25/04/2017</td>
-                  <td>Cindy</td>
-                  <td>Jl. Bangau Sei Mencirim II Medan Petisah Kota Medan</td>
-                  <td>Rp. 560.000</td>
-                  <td>Doormobil</td>
-                  <td><span class="badge badge-success">Success</span></td>
-                  <td><a href="detailorder.php" class="badge badge-info">Detail</a> <a href="#" class="badge badge-danger">Delete</a></td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>152264752</td>
-                  <td>24/04/2017</td>
-                  <td>25/04/2017</td>
-                  <td>Cindy</td>
-                  <td>Jl. Bangau Sei Mencirim II Medan Petisah Kota Medan</td>
-                  <td>Rp. 560.000</td>
-                  <td>Doormobil</td>
-                  <td><span class="badge badge-success">Success</span></td>
-                  <td><a href="detailorder.php" class="badge badge-info">Detail</a> <a href="#" class="badge badge-danger">Delete</a></td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>152264752</td>
-                  <td>24/04/2017</td>
-                  <td>25/04/2017</td>
-                  <td>Cindy</td>
-                  <td>Jl. Bangau Sei Mencirim II Medan Petisah Kota Medan</td>
-                  <td>Rp. 560.000</td>
-                  <td>Doormobil</td>
-                  <td><span class="badge badge-danger">Cancel</span></td>
-                  <td><a href="detailorder.php" class="badge badge-info">Detail</a> <a href="#" class="badge badge-danger">Delete</a></td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>152264752</td>
-                  <td>24/04/2017</td>
-                  <td>25/04/2017</td>
-                  <td>Cindy</td>
-                  <td>Jl. Bangau Sei Mencirim II Medan Petisah Kota Medan</td>
-                  <td>Rp. 560.000</td>
-                  <td>Doormobil</td>
-                  <td><span class="badge badge-success">Success</span></td>
-                  <td><a href="detailorder.php" class="badge badge-info">Detail</a> <a href="#" class="badge badge-danger">Delete</a></td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td>152264752</td>
-                  <td>24/04/2017</td>
-                  <td>25/04/2017</td>
-                  <td>Cindy</td>
-                  <td>Jl. Bangau Sei Mencirim II Medan Petisah Kota Medan</td>
-                  <td>Rp. 560.000</td>
-                  <td>Doormobil</td>
-                  <td><span class="badge badge-success">Success</span></td>
-                  <td><a href="detailorder.php" class="badge badge-info">Detail</a> <a href="#" class="badge badge-danger">Delete</a></td>
-                </tr>
-                <tr>
-                  <td>6</td>
-                  <td>152264752</td>
-                  <td>24/04/2017</td>
-                  <td>25/04/2017</td>
-                  <td>Cindy</td>
-                  <td>Jl. Bangau Sei Mencirim II Medan Petisah Kota Medan</td>
-                  <td>Rp. 560.000</td>
-                  <td>Doormobil</td>
-                  <td><span class="badge badge-danger">Cancel</span></td>
-                  <td><a href="detailorder.php" class="badge badge-info">Detail</a> <a href="#" class="badge badge-danger">Delete</a></td>
-                </tr>
-                <tr>
-                  <td>7</td>
-                  <td>152264752</td>
-                  <td>24/04/2017</td>
-                  <td>25/04/2017</td>
-                  <td>Cindy</td>
-                  <td>Jl. Bangau Sei Mencirim II Medan Petisah Kota Medan</td>
-                  <td>Rp. 560.000</td>
-                  <td>Doormobil</td>
-                  <td><span class="badge badge-success">Success</span></td>
-                  <td><a href="detailorder.php" class="badge badge-info">Detail</a> <a href="#" class="badge badge-danger">Delete</a></td>
-                </tr>
-                <tr>
-                  <td>8</td>
-                  <td>152264752</td>
-                  <td>24/04/2017</td>
-                  <td>25/04/2017</td>
-                  <td>Cindy</td>
-                  <td>Jl. Bangau Sei Mencirim II Medan Petisah Kota Medan</td>
-                  <td>Rp. 560.000</td>
-                  <td>Doormobil</td>
-                  <td><span class="badge badge-success">Success</span></td>
-                  <td><a href="detailorder.php" class="badge badge-info">Detail</a> <a href="#" class="badge badge-danger">Delete</a></td>
-                </tr>
-                <tr>
-                  <td>9</td>
-                  <td>152264752</td>
-                  <td>24/04/2017</td>
-                  <td>25/04/2017</td>
-                  <td>Cindy</td>
-                  <td>Jl. Bangau Sei Mencirim II Medan Petisah Kota Medan</td>
-                  <td>Rp. 560.000</td>
-                  <td>Doormobil</td>
-                  <td><span class="badge badge-success">Success</span></td>
-                  <td><a href="detailorder.php" class="badge badge-info">Detail</a> <a href="#" class="badge badge-danger">Delete</a></td>
-                </tr>
-                <tr>
-                  <td>10</td>
-                  <td>152264752</td>
-                  <td>24/04/2017</td>
-                  <td>25/04/2017</td>
-                  <td>Cindy</td>
-                  <td>Jl. Bangau Sei Mencirim II Medan Petisah Kota Medan</td>
-                  <td>Rp. 560.000</td>
-                  <td>Doormobil</td>
-                  <td><span class="badge badge-success">Success</span></td>
-                  <td><a href="detailorder.php" class="badge badge-info">Detail</a> <a href="#" class="badge badge-danger">Delete</a></td>
-                </tr>
-              </tbody>
+              
+<?php
+
+$i=1;
+if(isset($_GET['search']))
+{
+  $codesearch = $_GET['search'];
+  
+  $queryorder = mysqli_query($conn, "SELECT * FROM transaksi LEFT JOIN member ON member.id_member = transaksi.id_member INNER JOIN layanan ON layanan.id_layanan = transaksi.id_layanan INNER JOIN produk ON produk.id_produk = transaksi.id_produk WHERE id_order LIKE '%$codesearch%' ORDER BY transaksi.id_order");
+
+  
+  $jumlahsearch = mysqli_num_rows($queryorder);
+
+  for($i=1; $i<=$jumlahsearch; $i++)
+
+  while($order = mysqli_fetch_array($queryorder))
+  {
+  
+                echo '<tbody>';
+                echo '<tr>';
+                
+                  echo '<th scope="row">'.$i.'</th>';
+                  echo '<td>' . $order['id_order'].'</td>';
+                  echo '<td>' . $order['createdate'].'</td>';
+                  echo '<td>' . $order['dateorder'].'</td>';
+                  echo '<td>' . $order['nama'].'</td>';
+                  echo '<td>' . $order['alamatorder'].'</td>';
+                  echo '<td> Rp. ' . $order['produk_price'].'</td>';
+                  echo '<td>' . $order['layanan_name'].'</td>';
+                  if ($order['status'] == 1){
+                    echo '<td><span class="badge badge-warning">OnProgress</span></td>';
+                  } else if($order['status'] == 3) {
+                    echo '<td><span class="badge badge-success">Success</span></td>';
+                  } else {
+                    echo '<td><span class="badge badge-danger">Cancel</span></td>';
+                  }
+                  echo '<td><a href="detailorder.php?code='.$order["id_order"].'" class="badge badge-info">Detail</a> <a href="editorder.php?editorder='.$order['id_order'].'" class="badge badge-secondary">Edit</a> <a href=d_order.php?code='.$order["id_order"].'" class="badge badge-danger">Delete</a></td>';
+
+                echo '</tr>';
+                
+                
+              echo '</tbody>';
+              $i++;
+  }
+}
+  while($order = mysqli_fetch_array($queryorder))
+  { 
+   //$idorder = $order['id_order'];
+   //$sort = array($idorder);
+   //sort($sort);
+   
+           
+                echo '<tbody>';
+                echo '<tr>';
+                  
+
+                  echo '<th scope="row">'.$i.'</th>';
+                  echo '<td>' . $order['id_order'].'</td>';
+                  echo '<td>' . $order['createdate'].'</td>';
+                  echo '<td>' . $order['dateorder'].'</td>';
+                  echo '<td>' . $order['nama'].'</td>';
+                  echo '<td>' . $order['alamatorder'].'</td>';
+                  echo '<td> Rp. ' . $order['produk_price'].'</td>';
+                  echo '<td>' . $order['layanan_name'].'</td>';
+                  if ($order['status'] == 1){
+                    echo '<td><span class="badge badge-warning">OnProgress</span></td>';
+                  } else if($order['status'] == 3) {
+                    echo '<td><span class="badge badge-success">Success</span></td>';
+                  } else {
+                    echo '<td><span class="badge badge-danger">Cancel</span></td>';
+                  }
+                  
+                  echo '<td><a href="detailorder.php?code='.$order["id_order"].'" class="badge badge-info">Detail</a> <a href="editorder.php?editorder='.$order['id_order'].'" class="badge badge-secondary">Edit</a> <a href=d_order.php?code='.$order["id_order"].'" class="badge badge-danger">Delete</a></td>';
+
+                echo '</tr>';
+                
+                
+              echo '</tbody>';
+              $i++;
+              
+  }
+
+$jumlahsearch = mysqli_num_rows($queryorder);
+?>
+           
+
             </table>
-
-
           </div>
+
 <div class="row">
-  <div class="col-12 col-md-8">Showing 1 to 10 of ... entries</div>
+  <div class="col-12 col-md-8">Showing <?php echo $jumlahsearch ; ?> of  <?php echo $jumlahorder ; ?> entries</div>
   <div class="col-6 col-md-4">
   <nav aria-label="...">
   <ul class="pagination">

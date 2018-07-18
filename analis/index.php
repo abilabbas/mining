@@ -38,11 +38,10 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-            <h1 class="h2">Dashboard</h1>
+            <h1 class="h2">Dashboard Analis</h1>
             <div class="btn-toolbar mb-2 mb-md-0">
               <div class="btn-group mr-2">
-                <button class="btn btn-sm btn-outline-secondary">Share</button>
-                <button class="btn btn-sm btn-outline-secondary">Export</button>
+               
               </div>
             </div>
           </div>
@@ -56,8 +55,14 @@
       <div class="ago">
         <span class="bpi"><b>MEMBERS</b></span>
         <h2 class="bph">
-          320
-          <small class="bpj bpk">5% </small>
+         <?php echo $jumlahmember ; ?>
+          <small class="bpj bpk">
+          <?php
+            $persen = $jumlahmember /$jumlahmember;
+            $persen2 = round($persen *100);
+            echo $persen2;
+          ?>%
+          </small>
 
         </h2>
         <hr class="bpr aei">
@@ -70,8 +75,14 @@
       <div class="ago">
         <span class="bpi"><b>DOORMOBIL COMPLETE</b></span>
         <h2 class="bph">
-          90
-          <small class="bpj bpl">1.3%</small>
+          <?php echo $jumlahdoormobil; ?>
+          <small class="bpj bpl">
+            <?php
+            $persen = $jumlahdoormobil /$totaldoormobil;
+            $persen2 = round($persen *100);
+            echo $persen2;
+          ?>%
+          </small>
         </h2>
         <hr class="bpr aei">
       </div>
@@ -83,8 +94,14 @@
       <div class="ago">
         <span class="bpi"><b>DOORMOTOR COMPLETE</b></span>
         <h2 class="bph">
-          14
-          <small class="bpj bpk">6.75%</small>
+          <?php echo $jumlahdoormotor; ?>
+          <small class="bpj bpk">
+          <?php
+            $persen = $jumlahdoormotor /$totaldoormotor;
+            $persen2 = round($persen *100);
+            echo $persen2;
+          ?>%
+          </small>
         </h2>
         <hr class="bpr aei">
       </div>
@@ -96,8 +113,14 @@
       <div class="ago">
         <span class="bpi"><b>TOTAL ORDER</b></span>
         <h2 class="bph">
-          87
-          <small class="bpj bpl">1.3%</small>
+          <?php echo $jumlahorder ; ?>
+          <small class="bpj bpl">
+          <?php
+            $persen = $jumlahorder/$jumlahorder;
+            $persen2 = round($persen *100);
+            echo $persen2;
+          ?>%
+          </small>
         </h2>
         <hr class="bpr aei">
       </div>
@@ -106,7 +129,6 @@
   </div>
 </div>
 <!--  -->
-          
 
 
 

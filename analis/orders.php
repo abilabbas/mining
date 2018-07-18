@@ -6,7 +6,6 @@ $jumlah = mysqli_num_rows($queryorder);
 ?>
 
 
-
     <div class="container-fluid">
       <div class="row">
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
@@ -19,7 +18,7 @@ $jumlah = mysqli_num_rows($queryorder);
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="orders.php">
+                <a class="nav-link active" href="orders.php">
                   <span data-feather="file"></span>
                   Orders
                 </a>
@@ -31,7 +30,7 @@ $jumlah = mysqli_num_rows($queryorder);
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="analis.php">
+                <a class="nav-link" href="analis.php">
                   <span data-feather="bar-chart-2"></span>
                   Analis
                 </a>
@@ -44,11 +43,10 @@ $jumlah = mysqli_num_rows($queryorder);
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-            <h1 class="h2">Analis</h1>
+            <h1 class="h2">Orders</h1>
             <div class="btn-toolbar mb-2 mb-md-0">
               <div class="btn-group mr-2">
-                <!--<button class="btn btn-sm btn-outline-secondary">Share</button>-->
-                <!--<button class="btn btn-sm btn-outline-secondary">Export</button>-->
+               
               </div>
               
             </div>
@@ -57,53 +55,90 @@ $jumlah = mysqli_num_rows($queryorder);
         
 <!--- grafik info ---->
 
-<div class="container">
-      <div class="jumbotron mt-3">
-      <h4>Pengujian Sistem</h4>
-        
-        <p class="lead">This example is a quick exercise to illustrate how the bottom navbar works.</p>
+<div class="dh brg">
+  <div class="eq fp afd amk asi">
+    <div class="brh bpn"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
+      <div class="ago">
+        <span class="bpi"><b>MEMBERS</b></span>
+        <h2 class="bph">
+         <?php echo $jumlahmember ; ?>
+          <small class="bpj bpk">
+          <?php
+            $persen = $jumlahmember /$jumlahmember;
+            $persen2 = round($persen *100);
+            echo $persen2;
+          ?>%
+          </small>
 
-<form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST" class="needs-validation" novalidate>
-      <div class="form-group row">
-                <div class="col-md-4 mb-3">
-                      <label for="validationDefault02">Tanggal Awal</label>
-                      <!--<input type="search" name="tglawal" class="form-control" id="validationDefault02">-->
-                      <input class="form-control mr-sm-2" type="search" name="tglawal" placeholder="Format: yyyy-mm-dd | ex: 2017-04-25">
-                </div>
-                <div class="col-md-4 mb-3">
-                      <label for="validationDefault02">Tanggal Akhir</label>
-                      <!--<input type="search" name="tglakhir" class="form-control" id="validationDefault02" placeholder="Format: yyyy-mm-dd | ex: 2017-12-25">-->
-                      <input class="form-control mr-sm-2" type="search" name="tglakhir" placeholder="Format: yyyy-mm-dd | ex: 2017-12-25">
-                </div>
+        </h2>
+        <hr class="bpr aei">
       </div>
-
-      
-      <div class="form-group row">
-                <label for="opt_day" class="col-sm-2 col-form-label">Support</label>
-                <div class="form-group col-md-2">
-                      <input type="text" name="support" class="form-control" id="validationDefault02" placeholder="0" value="" required>
-                </div>
-
-                <label for="opt_day" class="col-sm-2 col-form-label">Sequence</label>
-                <div class="form-group col-md-2">
-                     <input type="text" name="sequence" class="form-control" id="validationDefault02" placeholder="0" value="" required>
-                </div>
-      </div>
-      
-           
-          <button name="caridata" class="btn btn-primary my-2 my-sm-0"  type="submit">Tampilkan Data</button>
-          <button name="proses" class="btn btn-success my-2 my-sm-0"  type="submit">Proses</button>            
-              
-           
-</form>     
-        
-      </div>
+      <img src="../assets/img/download1.png">
     </div>
+  </div>
+  <div class="eq fp afd amk asi">
+    <div class="brh bpq"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
+      <div class="ago">
+        <span class="bpi"><b>DOORMOBIL COMPLETE</b></span>
+        <h2 class="bph">
+          <?php echo $jumlahdoormobil; ?>
+          <small class="bpj bpl">
+            <?php
+            $persen = $jumlahdoormobil /$totaldoormobil;
+            $persen2 = round($persen *100);
+            echo $persen2;
+          ?>%
+          </small>
+        </h2>
+        <hr class="bpr aei">
+      </div>
+      <img src="../assets/img/download2.png">
+    </div>
+  </div>
+  <div class="eq fp afd amk asi">
+    <div class="brh bpo"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
+      <div class="ago">
+        <span class="bpi"><b>DOORMOTOR COMPLETE</b></span>
+        <h2 class="bph">
+          <?php echo $jumlahdoormotor; ?>
+          <small class="bpj bpk">
+          <?php
+            $persen = $jumlahdoormotor /$totaldoormotor;
+            $persen2 = round($persen *100);
+            echo $persen2;
+          ?>%
+          </small>
+        </h2>
+        <hr class="bpr aei">
+      </div>
+      <img src="../assets/img/download3.png">
+    </div>
+  </div>
+  <div class="eq fp afd amk asi">
+    <div class="brh bpp"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
+      <div class="ago">
+        <span class="bpi"><b>TOTAL ORDER</b></span>
+        <h2 class="bph">
+          <?php echo $jumlahorder ; ?>
+          <small class="bpj bpl">
+          <?php
+            $persen = $jumlahorder/$jumlahorder;
+            $persen2 = round($persen *100);
+            echo $persen2;
+          ?>%
+          </small>
+        </h2>
+        <hr class="bpr aei">
+      </div>
+      <img src="../assets/img/download4.png">
+    </div>
+  </div>
+</div>
 <!--  -->
 
 <div class="row flex-nowrap justify-content-between align-items-center">
           <div class="col-4 pt-1">
-            
+           
           </div>
           <div class="col-4 text-center">
             <form action="<?php $_SERVER['PHP_SELF'];?>" method="POST">
@@ -126,15 +161,17 @@ $jumlah = mysqli_num_rows($queryorder);
             </div>
 
           </form>
+
           </div>
-         <!-- <form action="<?php // $_SERVER['PHP_SELF'];?>" method="get" class="col-4 d-flex justify-content-end align-items-center">
+          <form action="<?php $_SERVER['PHP_SELF'];?>" method="get" class="col-4 d-flex justify-content-end align-items-center">
             <a class="text-muted" href="#">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-3"><circle cx="10.5" cy="10.5" r="7.5"></circle><line x1="21" y1="21" x2="15.8" y2="15.8"></line></svg>
             </a>
             <input type="text" class="form-control bsx" name="search" placeholder="Search orders">
-          </form>-->
+          </form>
 </div>
 
+<!--sort-->
 <?php
   
   if(isset($_POST['maxrows2'])){
@@ -145,6 +182,7 @@ $jumlah = mysqli_num_rows($queryorder);
   //$queryorder = mysqli_query($conn, "SELECT * FROM transaksi LEFT JOIN member ON member.id_member = transaksi.id_member INNER JOIN layanan ON layanan.id_layanan = transaksi.id_layanan INNER JOIN produk ON produk.id_produk = transaksi.id_produk ORDER BY transaksi.id_order ");
 }
 ?>
+<!--end sort-->
 
           <h4>Table Orders</h4>
           <div class="table-responsive">
@@ -165,20 +203,19 @@ $jumlah = mysqli_num_rows($queryorder);
               </thead>
               
 <?php
-  
-  
-
 $i=1;
-if(isset($_POST['caridata']))
-{
-   
-  $tglawal = $_POST['tglawal'];
-  $tglakhir = $_POST['tglakhir'];
- 
-  $queryorder2 = mysqli_query($conn, "SELECT * FROM transaksi LEFT JOIN member ON member.id_member = transaksi.id_member INNER JOIN layanan ON layanan.id_layanan = transaksi.id_layanan INNER JOIN produk ON produk.id_produk = transaksi.id_produk  WHERE dateorder between '$tglawal' AND '$tglakhir' ORDER BY transaksi.dateorder"); 
-  
 
-  while($order = mysqli_fetch_array($queryorder2))
+if(isset($_GET['search']))
+{
+  $codesearch = $_GET['search'];
+  
+  $queryorder = mysqli_query($conn, "SELECT * FROM transaksi WHERE id_order LIKE '%$codesearch%'"); 
+  
+  $jumlahsearch = mysqli_num_rows($queryorder);
+
+  for($i=1; $i<=$jumlahsearch; $i++)
+
+  while($order = mysqli_fetch_array($queryorder))
   {
   
                 echo '<tbody>';
@@ -199,18 +236,15 @@ if(isset($_POST['caridata']))
                   } else {
                     echo '<td><span class="badge badge-danger">Cancel</span></td>';
                   }
-                  echo '<td><a href="detailorder.php?code='.$order["id_order"].'" class="badge badge-info">Detail</a> <a href="editorder.php?editorder='.$order['id_order'].'" class="badge badge-secondary">Edit</a> <a href=d_order.php?code='.$order["id_order"].'" class="badge badge-danger">Delete</a></td>';
+                  
+                  echo '<td><a href="detailorder.php?code='.$order["id_order"].'" class="badge badge-info">Detail</a> </td>';
 
                 echo '</tr>';
                 
                 
               echo '</tbody>';
-              $i++;
-                $jumlahsearch = $i;
-  }
-
+  }           $i++;
 }
-else{
 
   while($order = mysqli_fetch_array($queryorder))
   { 
@@ -239,7 +273,8 @@ else{
                     echo '<td><span class="badge badge-danger">Cancel</span></td>';
                   }
                   
-                  echo '<td><a href="detailorder.php?code='.$order["id_order"].'" class="badge badge-info">Detail</a> <a href="editorder.php?editorder='.$order['id_order'].'" class="badge badge-secondary">Edit</a> <a href=d_order.php?code='.$order["id_order"].'" class="badge badge-danger">Delete</a></td>';
+                  
+                  echo '<td><a href="detailorder.php?code='.$order["id_order"].'" class="badge badge-info">Detail</a> </td>';
 
                 echo '</tr>';
                 
@@ -248,7 +283,7 @@ else{
               $i++;
               
   }
-}
+
 $jumlahsearch = mysqli_num_rows($queryorder);
 ?>
            
@@ -276,15 +311,15 @@ $jumlahsearch = mysqli_num_rows($queryorder);
 </nav>
 </div>
 
-</main>
-</div>
-</div>    
-
+        </main>
+      </div>
+    </div>
+    
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script>window.jQuery || document.write('<script src="../../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
     <script src="../assets/js/vendor/popper.min.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
 

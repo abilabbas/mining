@@ -42,8 +42,8 @@
             <h1 class="h2">Members</h1>
             <div class="btn-toolbar mb-2 mb-md-0">
               <div class="btn-group mr-2">
-                <button class="btn btn-sm btn-outline-secondary">Share</button>
-                <button class="btn btn-sm btn-outline-secondary">Export</button>
+                <!--<button class="btn btn-sm btn-outline-secondary">Share</button>-->
+                <!--<button class="btn btn-sm btn-outline-secondary">Export</button>-->
               </div>
               
             </div>
@@ -58,9 +58,14 @@
       <div class="ago">
         <span class="bpi"><b>MEMBERS</b></span>
         <h2 class="bph">
-          <?php echo $jumlahmember ; ?>
-
-          <small class="bpj bpk">5% </small>
+         <?php echo $jumlahmember ; ?>
+          <small class="bpj bpk">
+          <?php
+            $persen = $jumlahmember /$jumlahmember;
+            $persen2 = round($persen *100);
+            echo $persen2;
+          ?>%
+          </small>
 
         </h2>
         <hr class="bpr aei">
@@ -73,8 +78,14 @@
       <div class="ago">
         <span class="bpi"><b>DOORMOBIL COMPLETE</b></span>
         <h2 class="bph">
-          90
-          <small class="bpj bpl">1.3%</small>
+          <?php echo $jumlahdoormobil; ?>
+          <small class="bpj bpl">
+            <?php
+            $persen = $jumlahdoormobil /$totaldoormobil;
+            $persen2 = round($persen *100);
+            echo $persen2;
+          ?>%
+          </small>
         </h2>
         <hr class="bpr aei">
       </div>
@@ -86,8 +97,14 @@
       <div class="ago">
         <span class="bpi"><b>DOORMOTOR COMPLETE</b></span>
         <h2 class="bph">
-          14
-          <small class="bpj bpk">6.75%</small>
+          <?php echo $jumlahdoormotor; ?>
+          <small class="bpj bpk">
+          <?php
+            $persen = $jumlahdoormotor /$totaldoormotor;
+            $persen2 = round($persen *100);
+            echo $persen2;
+          ?>%
+          </small>
         </h2>
         <hr class="bpr aei">
       </div>
@@ -99,8 +116,14 @@
       <div class="ago">
         <span class="bpi"><b>TOTAL ORDER</b></span>
         <h2 class="bph">
-          87
-          <small class="bpj bpl">1.3%</small>
+          <?php echo $jumlahorder ; ?>
+          <small class="bpj bpl">
+          <?php
+            $persen = $jumlahorder/$jumlahorder;
+            $persen2 = round($persen *100);
+            echo $persen2;
+          ?>%
+          </small>
         </h2>
         <hr class="bpr aei">
       </div>
@@ -112,10 +135,25 @@
 
 <div class="row flex-nowrap justify-content-between align-items-center">
           <div class="col-4 pt-1">
-            <a class="text-muted" href="addmember.php">Add Member</a>
+            <a href="addmember.php" ><button class="btn btn-success my-2 my-sm-0">Add Member</button></a>
           </div>
           <div class="col-4 text-center">
-            <a class="blog-header-logo text-dark" href="#">Large</a>
+            <form action="<?php $_SERVER['PHP_SELF'];?>" method="POST">
+            <div class="input-group col col-lg-6">
+            <select name="maxrows" class="custom-select" id="inputGroupSelect04">
+              <option value="10">10</option>
+              <option value="25">25</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+              <option value="250">250</option>
+              <option value="500">500</option>
+              <option value="<?php echo $jumlahmember; ?>">All</option>
+            </select>
+            <div class="input-group-append">
+              <button name="maxrows2" class="btn btn-outline-secondary" type="submit">Rows</button>
+            </div>
+            </div>
+            </form>
           </div>
           <form action="<?php $_SERVER['PHP_SELF'];?>" method="get" class="col-4 d-flex justify-content-end align-items-center">
             <a class="text-muted" href="#">
@@ -125,28 +163,39 @@
           </form>
 </div>
 
-        
+<!--sort-->
+<?php
+  
+  if(isset($_POST['maxrows2'])){
+ 
+  $limit = $_POST['maxrows'];
+
+  $query = mysqli_query($conn, "SELECT * FROM member LIMIT  $limit");
+  //$queryorder = mysqli_query($conn, "SELECT * FROM transaksi LEFT JOIN member ON member.id_member = transaksi.id_member INNER JOIN layanan ON layanan.id_layanan = transaksi.id_layanan INNER JOIN produk ON produk.id_produk = transaksi.id_produk ORDER BY transaksi.id_order ");
+}
+?>
+<!--end sort-->
+<br/>
         <h4>Table Members</h4>
           <div class="table-responsive">
-            <table class="table table-striped table-sm">
+            <table class="table table-hover">
               <thead>
                 <tr>
                   <th>No</th>
                   <th>Id User</th>
                   <th>Nama</th>
                   <th>Email</th>
-                  <th>Alamat</th>
                   <th>Ponsel</th>
                   <th>Action</th>
                 </tr>
               </thead>
 <?php
-
+$i=1;
 if(isset($_GET['search']))
 {
   $codesearch = $_GET['search'];
   
-  $query = mysqli_query($conn, "SELECT * FROM member WHERE nama LIKE '%$codesearch%' OR email LIKE '%$codesearch%' OR alamat LIKE '%$codesearch%'"); 
+  $query = mysqli_query($conn, "SELECT * FROM member WHERE nama LIKE '%$codesearch%' OR email LIKE '%$codesearch%'"); 
   
   $jumlahsearch = mysqli_num_rows($query);
 
@@ -157,11 +206,10 @@ if(isset($_GET['search']))
                 echo '<tbody>';
                 echo '<tr>';
                 
-                  echo '<td></td>';
+                  echo '<th scope="row">'.$i.'</th>';
                   echo '<td>' . $rows['id_member'].'</td>';
                   echo '<td>' . $rows['nama'].'</td>';
                   echo '<td>' . $rows['email'].'</td>';
-                  echo '<td>' . $rows['alamat'].'</td>';
                   echo '<td>' . $rows['nohp'].'</td>';
                   echo '<td><a href="detailmember.php?code='.$rows["id_member"].'" class="badge badge-info">Detail</a> <a href="editmember.php?update='.$rows['id_member'].'" class="badge badge-secondary">Edit</a> <a href=d_member.php?code='.$rows["id_member"].'" class="badge badge-danger">Delete</a></td>';
 
@@ -169,6 +217,7 @@ if(isset($_GET['search']))
                 
                 
               echo '</tbody>';
+              $i++;
   }
 }
 
@@ -178,11 +227,10 @@ if(isset($_GET['search']))
                 echo '<tbody>';
                 echo '<tr>';
                   
-                  echo '<td></td>';
+                  echo '<th scope="row">'.$i.'</th>';
                   echo '<td>' . $rows['id_member'].'</td>';
                   echo '<td>' . $rows['nama'].'</td>';
                   echo '<td>' . $rows['email'].'</td>';
-                  echo '<td>' . $rows['alamat'].'</td>';
                   echo '<td>' . $rows['nohp'].'</td>';
                   echo '<td><a href="detailmember.php?code='.$rows["id_member"].'" class="badge badge-info">Detail</a> <a href="editmember.php?update='.$rows['id_member'].'" class="badge badge-secondary">Edit</a> <a href=d_member.php?code='.$rows["id_member"].'" class="badge badge-danger">Delete</a></td>';
                   
@@ -190,7 +238,7 @@ if(isset($_GET['search']))
                 
                 
               echo '</tbody>';
-              
+              $i++;
               
   }
 $jumlahsearch = mysqli_num_rows($query);

@@ -1,2 +1,1 @@
-# mining
-Defence Project
+skripsi

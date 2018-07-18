@@ -14,13 +14,13 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="orders.php">
+                <a class="nav-link " href="orders.php">
                   <span data-feather="file"></span>
                   Orders
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="members.php">
+                <a class="nav-link active" href="members.php">
                   <span data-feather="users"></span>
                   Members
                 </a>
@@ -39,28 +39,97 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-            <h1 class="h2">Add Order</h1>
+            <h1 class="h2">Members</h1>
             <div class="btn-toolbar mb-2 mb-md-0">
               <div class="btn-group mr-2">
-                
+               
               </div>
               
             </div>
           </div>
 
-<div class="container">
-      <div class="jumbotron mt-3">
-        <h1>Cari Member</h1>
-       
-        <p class="lead">Cari member untuk order. Jika member belum ada klik  <a class="text-muted" href="addmember.php">Add Member</a> </p>
-        <form action="<?php $_SERVER['PHP_SELF'];?>" method="GET" class="form-inline">
-          <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search members" >
-          <button name="searchbtn" class="btn btn-outline-success my-2 my-sm-0"  type="submit">Search</button>
+        
+<!--- grafik info ---->
 
-        </form>
-       
+<div class="dh brg">
+  <div class="eq fp afd amk asi">
+    <div class="brh bpn"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
+      <div class="ago">
+        <span class="bpi"><b>MEMBERS</b></span>
+        <h2 class="bph">
+         <?php echo $jumlahmember ; ?>
+          <small class="bpj bpk">
+          <?php
+            $persen = $jumlahmember /$jumlahmember;
+            $persen2 = round($persen *100);
+            echo $persen2;
+          ?>%
+          </small>
+
+        </h2>
+        <hr class="bpr aei">
       </div>
+      <img src="../assets/img/download1.png">
     </div>
+  </div>
+  <div class="eq fp afd amk asi">
+    <div class="brh bpq"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
+      <div class="ago">
+        <span class="bpi"><b>DOORMOBIL COMPLETE</b></span>
+        <h2 class="bph">
+          <?php echo $jumlahdoormobil; ?>
+          <small class="bpj bpl">
+            <?php
+            $persen = $jumlahdoormobil /$totaldoormobil;
+            $persen2 = round($persen *100);
+            echo $persen2;
+          ?>%
+          </small>
+        </h2>
+        <hr class="bpr aei">
+      </div>
+      <img src="../assets/img/download2.png">
+    </div>
+  </div>
+  <div class="eq fp afd amk asi">
+    <div class="brh bpo"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
+      <div class="ago">
+        <span class="bpi"><b>DOORMOTOR COMPLETE</b></span>
+        <h2 class="bph">
+          <?php echo $jumlahdoormotor; ?>
+          <small class="bpj bpk">
+          <?php
+            $persen = $jumlahdoormotor /$totaldoormotor;
+            $persen2 = round($persen *100);
+            echo $persen2;
+          ?>%
+          </small>
+        </h2>
+        <hr class="bpr aei">
+      </div>
+      <img src="../assets/img/download3.png">
+    </div>
+  </div>
+  <div class="eq fp afd amk asi">
+    <div class="brh bpp"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
+      <div class="ago">
+        <span class="bpi"><b>TOTAL ORDER</b></span>
+        <h2 class="bph">
+          <?php echo $jumlahorder ; ?>
+          <small class="bpj bpl">
+          <?php
+            $persen = $jumlahorder/$jumlahorder;
+            $persen2 = round($persen *100);
+            echo $persen2;
+          ?>%
+          </small>
+        </h2>
+        <hr class="bpr aei">
+      </div>
+      <img src="../assets/img/download4.png">
+    </div>
+  </div>
+</div>
 <!--  -->
 
 <div class="row flex-nowrap justify-content-between align-items-center">
@@ -69,6 +138,9 @@
           </div>
           <div class="col-4 text-center">
             <form action="<?php $_SERVER['PHP_SELF'];?>" method="POST">
+
+            
+
             <div class="input-group col col-lg-6">
             <select name="maxrows" class="custom-select" id="inputGroupSelect04">
               <option value="10">10</option>
@@ -83,9 +155,16 @@
               <button name="maxrows2" class="btn btn-outline-secondary" type="submit">Rows</button>
             </div>
             </div>
-            </form>
+
+          </form>
+
           </div>
-          
+          <form action="<?php $_SERVER['PHP_SELF'];?>" method="get" class="col-4 d-flex justify-content-end align-items-center">
+            <a class="text-muted" href="#">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-3"><circle cx="10.5" cy="10.5" r="7.5"></circle><line x1="21" y1="21" x2="15.8" y2="15.8"></line></svg>
+            </a>
+            <input type="text" class="form-control bsx" name="search" placeholder="Search members">
+          </form>
 </div>
 
 <!--sort-->
@@ -100,8 +179,6 @@
 }
 ?>
 <!--end sort-->
-
-
         
         <h4>Table Members</h4>
           <div class="table-responsive">
@@ -118,7 +195,8 @@
               </thead>
 <?php
 
-$i=1;
+$i = 1;
+
 if(isset($_GET['search']))
 {
   $codesearch = $_GET['search'];
@@ -139,8 +217,8 @@ if(isset($_GET['search']))
                   echo '<td>' . $rows['nama'].'</td>';
                   echo '<td>' . $rows['email'].'</td>';
                   echo '<td>' . $rows['nohp'].'</td>';
-                  echo '<td><a href="orderform.php?code='.$rows["id_member"].'" ><button class="btn btn-success my-2 my-sm-0">Order</button></a>';
-                 
+                  echo '<td><a href="detailmember.php?code='.$rows["id_member"].'" class="badge badge-info">Detail</a> </td>';
+
                 echo '</tr>';
                 
                 
@@ -148,7 +226,7 @@ if(isset($_GET['search']))
               $i++;
   }
 }
-
+  
   while($rows = mysqli_fetch_array($query))
   { 
                 
@@ -159,16 +237,18 @@ if(isset($_GET['search']))
                   echo '<td>' . $rows['id_member'].'</td>';
                   echo '<td>' . $rows['nama'].'</td>';
                   echo '<td>' . $rows['email'].'</td>';
-                  
                   echo '<td>' . $rows['nohp'].'</td>';
-                   echo '<td><a href="orderform.php?code='.$rows["id_member"].'" ><button class="btn btn-success my-2 my-sm-0">Order</button></a>';
-                 
+                  echo '<td><a href="detailmember.php?code='.$rows["id_member"].'" class="badge badge-info">Detail</a> </td>';
+                  
                 echo '</tr>';
                 
                 
               echo '</tbody>';
-              $i++;              
+              $i++;
+              
+              
   }
+  
 $jumlahsearch = mysqli_num_rows($query);
 ?>
             </table>

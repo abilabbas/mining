@@ -13,9 +13,9 @@ if(isset($_SESSION['userSession']) === true)
   $session_active = $_SESSION['userSession'];
   $sql = mysqli_query($conn, "SELECT * FROM admin WHERE email='$session_active'");
   $rows = mysqli_fetch_array($sql);
-  if ($rows['status'] == "analis")
+  if ($rows['status'] == "admin")
   {
-  header("location:../analis/index.php");
+  header("location:../admin/index.php");
   exit();
   }
 }
@@ -49,11 +49,6 @@ $querydoormobil2 = mysqli_query($conn, "SELECT * FROM transaksi WHERE id_layanan
 $totaldoormobil = mysqli_num_rows($querydoormobil2);
 $querydoormobil = mysqli_query($conn, "SELECT * FROM transaksi WHERE id_layanan='1' && status='3'");
 $jumlahdoormobil = mysqli_num_rows($querydoormobil);
-?>
-
-<?php
-$queryprogress = mysqli_query($conn, "SELECT * FROM transaksi WHERE status='1'");
-$jumlahprogress = mysqli_num_rows($queryprogress);
 ?>
 <!--showjumlahEnd-->
 

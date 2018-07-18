@@ -85,7 +85,7 @@
             </li>
             <li class="list-group-item d-flex justify-content-between">
               <span>Total (USD)</span>
-              <strong>$20</strong>
+              <strong><?php echo $jumlahorder ; ?></strong>
             </li>
           </ul>
 

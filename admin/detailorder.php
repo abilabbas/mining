@@ -1,6 +1,27 @@
 <?php include "header.php";?>
+<?php 
+ 
+include("../config.php"); 
+ 
+// kalau tidak ada id di query string 
+if( !isset($_GET['code']) ){     
+  header('Location: orders.php'); } 
+ 
+//ambil id dari query string 
+  $code = $_GET['code']; 
+ 
+// buat query untuk ambil data dari database 
 
-
+  $queryorder = mysqli_query($conn, "SELECT * FROM transaksi LEFT JOIN member ON member.id_member = transaksi.id_member LEFT JOIN layanan ON layanan.id_layanan = transaksi.id_layanan LEFT JOIN produk ON produk.id_produk = transaksi.id_produk LEFT JOIN payment ON payment.id_payment = transaksi.id_payment WHERE id_order='$code'");
+  $jumlah = mysqli_num_rows($queryorder);
+  $order = mysqli_fetch_assoc($queryorder);
+ 
+// jika data yang di-edit tidak ditemukan 
+  if($jumlah < 1 ){     
+    die("data tidak ditemukan..."); 
+  } 
+ 
+?> 
 
     <div class="container-fluid">
       <div class="row">
@@ -48,56 +69,44 @@
             </div>
           </div>
 
-         <div class="row">
+<!--info-->
+        <div class="row">
         <div class="col-md-4 order-md-2 mb-4">
           <h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span class="text-muted">Your cart</span>
-            <span class="badge badge-secondary badge-pill">3</span>
+            <span class="text-muted">Info</span>
+            <span class="badge badge-secondary badge-pill"></span>
           </h4>
           <ul class="list-group mb-3">
             <li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>
-                <h6 class="my-0">Product name</h6>
-                <div class="text-muted">Brief description</div>
+                <h6 class="my-0">Member Doorjek</h6>
+                <div class="text-muted">Last Update</div>
               </div>
-              <span class="text-muted">$12</span>
+              <span class="text-muted"><?php echo $jumlahmember ; ?></span>
             </li>
             <li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>
-                <h6 class="my-0">Second product</h6>
+                <h6 class="my-0">Doormobil Complete</h6>
                 <div class="text-muted">Brief description</div>
               </div>
-              <span class="text-muted">$8</span>
+              <span class="text-muted"><?php echo $jumlahdoormobil; ?></span>
             </li>
             <li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>
-                <h6 class="my-0">Third item</h6>
+                <h6 class="my-0">Doormotor Complete</h6>
                 <div class="text-muted">Brief description</div>
               </div>
-              <span class="text-muted">$5</span>
+              <span class="text-muted"><?php echo $jumlahdoormotor; ?></span>
             </li>
-            <li class="list-group-item d-flex justify-content-between bg-light">
-              <div class="text-success">
-                <h6 class="my-0">Promo code</h6>
-                <div class="text-muted">EXAMPLECODE</div>
-              </div>
-              <span class="text-success">-$5</span>
-            </li>
+            
             <li class="list-group-item d-flex justify-content-between">
-              <span>Total (USD)</span>
-              <strong>$20</strong>
+              <span>Total Order</span>
+              <strong><?php echo $jumlahorder ; ?></strong>
             </li>
           </ul>
-
-          <form class="card p-2">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Promo code">
-              <div class="input-group-append">
-                <button type="submit" class="btn btn-secondary">Redeem</button>
-              </div>
-            </div>
-          </form>
         </div>
+<!--info end--> 
+
         <div class="col-md-8 order-md-1">
           <h4 class="mb-3">Detail User</h4>
           <form action="" method="" class="needs-validation" novalidate>
@@ -108,7 +117,7 @@
           <label for="staticEmail" class="col-sm-2 col-form-label">Id User</label>
           <div class="col-sm-10">
           
-            <input type="text" id="disabledTextInput" class="form-control" placeholder="142264752" readonly>
+            <input type="text" id="disabledTextInput" class="form-control" placeholder="<?php echo $order['id_member'] ?>" readonly>
           
           </div>
         </div>
@@ -117,7 +126,7 @@
           <label for="staticEmail" class="col-sm-2 col-form-label">Nama</label>
           <div class="col-sm-10">
           
-            <input type="text" id="disabledTextInput" class="form-control" placeholder="Abil Abbas Habibi" readonly>
+            <input type="text" id="disabledTextInput" class="form-control" placeholder="<?php echo $order['nama'] ?>" readonly>
           
           </div>
         </div>
@@ -126,7 +135,7 @@
           <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
           <div class="col-sm-10">
           
-            <input type="text" id="disabledTextInput" class="form-control" placeholder="abilabbas11@gmail.com" readonly>
+            <input type="text" id="disabledTextInput" class="form-control" placeholder="<?php echo $order['email'] ?>" readonly>
           
           </div>
         </div>
@@ -135,7 +144,7 @@
           <label for="staticEmail" class="col-sm-2 col-form-label">Alamat</label>
           <div class="col-sm-10">
           
-            <input type="text" id="disabledTextInput" class="form-control" placeholder="Jl. Bangau Sei Mencirim II Medan Petisah Kota Medan" readonly>
+            <input type="text" id="disabledTextInput" class="form-control" placeholder="<?php echo $order['alamat'] ?>" readonly>
           
           </div>
         </div>
@@ -144,7 +153,7 @@
           <label for="staticEmail" class="col-sm-2 col-form-label">Ponsel</label>
           <div class="col-sm-10">
          
-            <input type="text" id="disabledTextInput" class="form-control" placeholder="08123242746" readonly>
+            <input type="text" id="disabledTextInput" class="form-control" placeholder="<?php echo $order['nohp'] ?>" readonly>
          
           </div>
         </div>
@@ -154,8 +163,15 @@
          <div class="form-group row">
           <label for="staticEmail" class="col-sm-2 col-form-label">Status Progres</label>
           <div class="col-sm-10">
-          
-            <input type="text" id="disabledTextInput" class="form-control" placeholder="Success" readonly>
+          <?php
+            if ($order['status'] == 3){
+                    echo '<input type="text" id="disabledTextInput" class="form-control" placeholder="Success" readonly>';
+                  } else if ($order['status'] == 1){
+                    echo '<input type="text" id="disabledTextInput" class="form-control" placeholder="Progress" readonly>';
+                  } else {
+                    echo '<input type="text" id="disabledTextInput" class="form-control" placeholder="Cancel" readonly>';
+                  }
+          ?>
           
           </div>
         </div>
@@ -164,9 +180,16 @@
           <label for="staticEmail" class="col-sm-2 col-form-label">When</label>
           <div class="col-sm-10">
           
-            <input type="text" id="disabledTextInput" class="form-control" placeholder="25/04/2017" readonly>
+            <input type="text" id="disabledTextInput" class="form-control" placeholder="<?php echo $order['dateorder'] ?>" readonly>
           
           </div>
+        </div>
+
+        <div class="form-group row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Alamat Order</label>
+                <div class="col-sm-10">   
+                      <textarea name="alamatorder" class="form-control" id="exampleFormControlTextarea1" rows="2" placeholder="<?php echo $order['alamatorder'] ?>" readonly></textarea>
+                </div>
         </div>
 
         <h4 class="mb-3">Detail Produk</h4>
@@ -175,7 +198,7 @@
           <label for="staticEmail" class="col-sm-2 col-form-label">Nama Produk</label>
           <div class="col-sm-10">
          
-            <input type="text" id="disabledTextInput" class="form-control" placeholder="Regular" readonly>
+            <input type="text" id="disabledTextInput" class="form-control" placeholder="<?php echo $order['produk_name'] ?>" readonly>
           
           </div>
         </div>
@@ -184,7 +207,7 @@
           <label for="staticEmail" class="col-sm-2 col-form-label">Pembayaran</label>
           <div class="col-sm-10">
           
-            <input type="text" id="disabledTextInput" class="form-control" placeholder="Cash" readonly>
+            <input type="text" id="disabledTextInput" class="form-control" placeholder="<?php echo $order['payment_name'] ?>" readonly>
           
           </div>
         </div>
@@ -202,11 +225,11 @@
           <label for="staticEmail" class="col-sm-2 col-form-label">Harga Produk</label>
           <div class="col-sm-10">
           
-            <input type="text" id="disabledTextInput" class="form-control" placeholder="Rp. 46,000" readonly>
+            <input type="text" id="disabledTextInput" class="form-control" placeholder="Rp. <?php echo $order['produk_price'] ?>" readonly>
           
           </div>
         </div>
-
+<!--
         <h4 class="mb-3">Detail Vehicle</h4>
 
          <div class="form-group row">
@@ -244,6 +267,7 @@
           
           </div>
         </div>
+-->
         <div class="form-group row">
       
         </div>
