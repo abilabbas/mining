@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 19 Jul 2018 pada 05.33
+-- Generation Time: 17 Jul 2018 pada 06.48
 -- Versi Server: 10.1.26-MariaDB
 -- PHP Version: 7.1.8
 
@@ -88,7 +88,7 @@ INSERT INTO `member` (`id_member`, `email`, `nama`, `alamat`, `nohp`, `createdat
 (1, 'belabel69@gmail.com', 'Adhitya Pratama', '', '628996006969', '2017-04-13 17:00:00', 'door'),
 (2, 'putri.vero88@gmail.com', 'Putry', 'Jl. Ismailiyah No.28, Kota Matsum I, Medan Area, Kota Medan, Sumatera Utara 20215, Indonesia', '6285260451423', '2017-04-13 17:00:00', 'door'),
 (3, 'nadiaratnasari1411@gmail.com', 'Nadia Ratnasari', '', '6281375709678', '2017-04-13 17:00:00', 'door'),
-(4, 'hjntarigan@gmail.com', 'Hujan', '', '6281360980606', '2018-07-19 02:56:41', 'door'),
+(4, 'hjntarigan@gmaul.com', 'Hujan', '', '6281360980606', '2017-04-13 17:00:00', 'door'),
 (5, 'sugiantomunar@gmail.com', 'Sugianto', '', '62811606783', '2017-04-13 17:00:00', 'door'),
 (6, 'heru_kusnandar@yahoo.com', 'Heru Kusnandar', '', '6281263836606', '2017-04-13 17:00:00', 'door'),
 (7, 'hendro.koesmartoyo@gmail.com', 'hendro koesmartoyo', '', '6281368606172', '2017-04-13 17:00:00', 'door'),
@@ -1923,14 +1923,7 @@ INSERT INTO `member` (`id_member`, `email`, `nama`, `alamat`, `nohp`, `createdat
 (1833, 'richardcheng89@yahoo.co.id', 'Richard', '', '6281534240922', '2017-07-30 17:00:00', 'door'),
 (1834, 'ranndevia@gmail.com', 'Intran Devia Sari', '', '628126353175', '2017-07-30 17:00:00', 'door'),
 (1835, 'valdyazhary18@gmail.com', 'Valdy azhary', '', '6285361633232', '2017-07-30 17:00:00', 'door'),
-(1836, 'erlanasetia0@gmaill.cok', 'Erlana', '', '6289613178046', '2017-07-30 17:00:00', 'door'),
-(2390, 'tengkufakhri18@gmail.com', 'Tengku Fakhri Noor\r\n', '', '628116155914', '2017-10-11 17:00:00', 'door\r\n'),
-(2518, 'cindysariduha@gmail.com', 'Cindy duha\r\n', '', '6285207881111', '2017-11-04 17:00:00', 'door'),
-(2662, 'andi_lagi@yahoo.com', 'Andi aja', '', '6282165282283', '2017-11-27 17:00:00', 'door'),
-(2981, 'salwa.nurhasanah91@gmail.com', 'salwa\r\n', 'Jl. Sakti Lubis, Sitirejo II, Medan Amplas, Kota Medan, Sumatera Utara, Indonesia', '6281361599892', '2018-01-14 17:00:00', 'door'),
-(2985, 'flink_18@yahoo.com', 'Steven', 'Jl. Glugur No.37, Petisah Tengah, Medan Petisah, Kota Medan, Sumatera Utara 20111, Indonesia', '6282366969493', '2018-01-15 17:00:00', 'door'),
-(3011, 'delvinlim24@gmail.com', 'Delvin Lim\r\n', '', '6282160113288', '2018-01-17 17:00:00', 'door'),
-(3475, 'iqbalhood@gmail.com', 'Iqbal', 'Jl. Ismailiyah No.26, Kota Matsum I, Medan Area, Kota Medan, Sumatera Utara 20211, Indonesia', '6282368008333', '2017-05-02 17:00:00', 'door');
+(1836, 'erlanasetia0@gmaill.cok', 'Erlana', '', '6289613178046', '2017-07-30 17:00:00', 'door');
 
 -- --------------------------------------------------------
 
@@ -2749,7 +2742,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `member`
 --
 ALTER TABLE `member`
-  MODIFY `id_member` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3476;
+  MODIFY `id_member` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1837;
 --
 -- AUTO_INCREMENT for table `produk`
 --
@@ -2759,7 +2752,7 @@ ALTER TABLE `produk`
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id_order` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=650;COMMIT;
+  MODIFY `id_order` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=649;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

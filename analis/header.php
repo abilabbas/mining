@@ -50,6 +50,67 @@ $totaldoormobil = mysqli_num_rows($querydoormobil2);
 $querydoormobil = mysqli_query($conn, "SELECT * FROM transaksi WHERE id_layanan='1' && status='3'");
 $jumlahdoormobil = mysqli_num_rows($querydoormobil);
 ?>
+
+<?php
+$queryprogress = mysqli_query($conn, "SELECT * FROM transaksi WHERE status='1'");
+$jumlahprogress = mysqli_num_rows($queryprogress);
+?>
+
+<?php
+$querylayanan = mysqli_query($conn, "SELECT * FROM layanan");
+$jumlahlayanan = mysqli_num_rows($querylayanan);
+$rows = mysqli_fetch_array($querylayanan);
+?>
+
+<?php
+$queryproduk = mysqli_query($conn, "SELECT * FROM produk");
+$jumlahproduk = mysqli_num_rows($queryproduk);
+
+?>
+
+<?php
+  $querytglakhir = mysqli_query($conn, "SELECT * from transaksi where id_order='$jumlahorder'");
+  $qtglakhir = mysqli_fetch_array($querytglakhir);
+
+  $querytglawal = mysqli_query($conn, "SELECT * from transaksi where id_order=1");
+  $qtglawal = mysqli_fetch_array($querytglawal);
+?>
+
+<?php
+    
+    if ($result = $conn->query("select layanan_name from layanan", MYSQLI_USE_RESULT)) {
+      while ($i = $result->fetch_row()) {
+        $item[] = $i[0];
+      }
+        $result->close();
+    }
+  
+
+    if ($result = $conn->query("select produk_name from produk", MYSQLI_USE_RESULT)) {
+      while ($i = $result->fetch_row()) {
+        $item[] = $i[0];
+      }
+        $result->close();
+    }
+
+    $item1 = count($item) ; 
+    $item2 = count($item);
+
+    if ($result = $conn->query("select group_concat(layanan.layanan_name , produk.produk_name )
+        from transaksi left join layanan 
+       on (transaksi.id_layanan = layanan.id_layanan) left join produk
+       on (transaksi.id_produk = produk.id_produk) 
+       group by transaksi.id_order", MYSQLI_USE_RESULT)) {
+
+      
+      while ($b = $result->fetch_row()) {
+        $belian[] = $b[0];
+      }
+      
+        $result->close();
+    }
+    
+?>
 <!--showjumlahEnd-->
 
 <!doctype html>

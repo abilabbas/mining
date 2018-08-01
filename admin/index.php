@@ -5,36 +5,36 @@
       <div class="row">
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
           <div class="sidebar-sticky">
-            <ul class="nav flex-column">
-              <li class="nav-item">
-                <a class="nav-link active" href="index.php">
-                  <span data-feather="home"></span>
-                  Dashboard <span class="sr-only">(current)</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="orders.php">
-                  <span data-feather="file"></span>
-                  Orders
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="members.php">
-                  <span data-feather="users"></span>
-                  Members
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="analis.php">
-                  <span data-feather="bar-chart-2"></span>
-                  Analis
-                </a>
-              </li>
-            </ul>
-
-            
-          </div>
+              
+              <ul class="nav flex-column">
+                <li class="nav-item">
+                  <a class="nav-link active" href="index.php">
+                    <span data-feather="home"></span>
+                    Dashboard <span class="sr-only">(current)</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="orders.php">
+                    <span data-feather="file"></span>
+                    Orders
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="members.php">
+                    <span data-feather="users"></span>
+                    Members
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="analis.php">
+                    <span data-feather="bar-chart-2"></span>
+                    Analis
+                  </a>
+                </li>
+              </ul>
+          </div> 
         </nav>
+       
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
@@ -47,148 +47,178 @@
             </div>
           </div>
 
+          <!--============================--> 
+          <div class="dh brg"> 
+          
+          <!--============================--> 
+            <div class="eq fp afd amk asi">
+              <div class="brh bpn"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
+                <div class="ago">
+                  <span class="bpi"><b>MEMBERS</b></span>
+                  <h2 class="bph">
+                   <?php echo $jumlahmember ; ?>
+                    <small class="bpj bpk">
+                    <?php
+                      $persen = $jumlahmember /$jumlahmember;
+                      $persen2 = round($persen *100);
+                      echo $persen2.'%';
+                    ?>
+                    </small>
+
+                  </h2>
+                  <hr class="bpr aei">
+                </div>
+                <img src="../assets/img/download1.png" class="img-fluid" alt="Responsive image">
+              </div>
+            </div>
+             <!--============================--> 
+            <div class="eq fp afd amk asi">
+              <div class="brh bpq"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
+                <div class="ago">
+                  <span class="bpi"><b>DOORMOBIL COMPLETE</b></span>
+                  <h2 class="bph">
+                    <?php echo $jumlahdoormobil; ?>
+                    <small class="bpj bpl">
+                      <?php
+                      $persen = $jumlahdoormobil /$totaldoormobil;
+                      $persen2 = round($persen *100);
+                      echo $persen2;
+                    ?>%
+                    </small>
+                  </h2>
+                  <hr class="bpr aei">
+                </div>
+                <img src="../assets/img/download2.png" class="img-fluid" alt="Responsive image">
+              </div>
+            </div>
+            <!--============================-->
+            <div class="eq fp afd amk asi">
+              <div class="brh bpo"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
+                <div class="ago">
+                  <span class="bpi"><b>DOORMOTOR COMPLETE</b></span>
+                  <h2 class="bph">
+                    <?php echo $jumlahdoormotor; ?>
+                    <small class="bpj bpk">
+                    <?php
+                      $persen = $jumlahdoormotor /$totaldoormotor;
+                      $persen2 = round($persen *100);
+                      echo $persen2;
+                    ?>%
+                    </small>
+                  </h2>
+                  <hr class="bpr aei">
+                </div>
+                <img src="../assets/img/download3.png"  class="img-fluid" alt="Responsive image">
+              </div>
+            </div> 
+            <!--============================-->
+            <div class="eq fp afd amk asi">
+              <div class="brh bpp"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
+                <div class="ago">
+                  <span class="bpi"><b>TOTAL ORDER</b></span>
+                  <h2 class="bph">
+                    <?php echo $jumlahorder ; ?>
+                    <small class="bpj bpl">
+                    <?php
+                      $persen = $jumlahorder/$jumlahorder;
+                      $persen2 = round($persen *100);
+                      echo $persen2;
+                    ?>%
+                    </small>
+                  </h2>
+                  <hr class="bpr aei">
+                </div>
+                <img src="../assets/img/download4.png" class="img-fluid" alt="Responsive image">
+              </div>
+            </div>
+            <!--=============BARIS ke 2===============-->
+            <div class="eq fp afd amk asi">
+              <div class="brh bpq"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
+                <div class="ago">
+                  <span class="bpi"><b>ORDER DOORMOBIL</b></span>
+                  <h2 class="bph">
+                    <?php echo $totaldoormobil; ?>
+                    <small class="bpj bpl">
+                      <?php
+                      $persen = $totaldoormobil /$totaldoormobil;
+                      $persen2 = round($persen *100);
+                      echo $persen2;
+                    ?>%
+                    </small>
+                  </h2>
+                  <hr class="bpr aei">
+                </div>
+                <img src="../assets/img/download2.png" class="img-fluid" alt="Responsive image">
+              </div>
+            </div>
+            <!--=============BARIS ke 2===============-->
+            <div class="eq fp afd amk asi">
+              <div class="brh bpo"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
+                <div class="ago">
+                  <span class="bpi"><b>ORDER DOORMOTOR</b></span>
+                  <h2 class="bph">
+                    <?php echo $totaldoormotor; ?>
+                    <small class="bpj bpk">
+                    <?php
+                      $persen = $totaldoormotor/$totaldoormotor;
+                      $persen2 = round($persen *100);
+                      echo $persen2;
+                    ?>%
+                    </small>
+                  </h2>
+                  <hr class="bpr aei">
+                </div>
+                <img src="../assets/img/download3.png" class="img-fluid" alt="Responsive image">
+              </div>
+            </div>
+            <!--==================================-->
+            <div class="eq fp afd amk asi">
+              <div class="brh bpp"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
+                <div class="ago">
+                  <span class="bpi"><b>ON PROGRESS</b></span>
+                  <h2 class="bph">
+                    <?php echo $jumlahprogress ; ?>
+                    <small class="bpj bpl">
+                    <?php
+                      $persen = $jumlahprogress/$jumlahorder;
+                      $persen2 = round($persen *100);
+                      echo $persen2;
+                    ?>%
+                    </small>
+                  </h2>
+                  <hr class="bpr aei">
+                </div>
+                <img src="../assets/img/download4.png" class="img-fluid" alt="Responsive image">
+              </div>
+            </div>
+            <!--==================================-->
+           <div class="eq fp afd amk asi">
+              <div class="brh bpq"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
+                <div class="ago">
+                  <span class="bpi"><b>TOTAL CANCEL</b></span>
+                  <h2 class="bph">
+                    <?php echo $jumlahcancel; ?>
+                    <small class="bpj bpl">
+                      <?php
+                      $persen = $jumlahcancel /$jumlahorder;
+                      $persen2 = round($persen *100);
+                      echo $persen2;
+                    ?>%
+                    </small>
+                  </h2>
+                  <hr class="bpr aei">
+                </div>
+                <img src="../assets/img/download2.png" class="img-fluid" alt="Responsive image">
+              </div>
+            </div>
+          </div><!--end dh brg-->
+
+        </main>
+      </div>
+    </div>    
+
+
         
-<!--- grafik info ---->
-
-<div class="dh brg">
-  <div class="eq fp afd amk asi">
-    <div class="brh bpn"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
-      <div class="ago">
-        <span class="bpi"><b>MEMBERS</b></span>
-        <h2 class="bph">
-         <?php echo $jumlahmember ; ?>
-          <small class="bpj bpk">
-          <?php
-            $persen = $jumlahmember /$jumlahmember;
-            $persen2 = round($persen *100);
-            echo $persen2;
-          ?>%
-          </small>
-
-        </h2>
-        <hr class="bpr aei">
-      </div>
-      <img src="../assets/img/download1.png">
-    </div>
-  </div>
-  <div class="eq fp afd amk asi">
-    <div class="brh bpq"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
-      <div class="ago">
-        <span class="bpi"><b>DOORMOBIL COMPLETE</b></span>
-        <h2 class="bph">
-          <?php echo $jumlahdoormobil; ?>
-          <small class="bpj bpl">
-            <?php
-            $persen = $jumlahdoormobil /$totaldoormobil;
-            $persen2 = round($persen *100);
-            echo $persen2;
-          ?>%
-          </small>
-        </h2>
-        <hr class="bpr aei">
-      </div>
-      <img src="../assets/img/download2.png">
-    </div>
-  </div>
-  <div class="eq fp afd amk asi">
-    <div class="brh bpo"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
-      <div class="ago">
-        <span class="bpi"><b>DOORMOTOR COMPLETE</b></span>
-        <h2 class="bph">
-          <?php echo $jumlahdoormotor; ?>
-          <small class="bpj bpk">
-          <?php
-            $persen = $jumlahdoormotor /$totaldoormotor;
-            $persen2 = round($persen *100);
-            echo $persen2;
-          ?>%
-          </small>
-        </h2>
-        <hr class="bpr aei">
-      </div>
-      <img src="../assets/img/download3.png">
-    </div>
-  </div>
-  <div class="eq fp afd amk asi">
-    <div class="brh bpp"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
-      <div class="ago">
-        <span class="bpi"><b>TOTAL ORDER</b></span>
-        <h2 class="bph">
-          <?php echo $jumlahorder ; ?>
-          <small class="bpj bpl">
-          <?php
-            $persen = $jumlahorder/$jumlahorder;
-            $persen2 = round($persen *100);
-            echo $persen2;
-          ?>%
-          </small>
-        </h2>
-        <hr class="bpr aei">
-      </div>
-      <img src="../assets/img/download4.png">
-    </div>
-  </div>
-  <div class="eq fp afd amk asi">
-    <div class="brh bpq"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
-      <div class="ago">
-        <span class="bpi"><b>TOTAL ORDER DOORMOBIL</b></span>
-        <h2 class="bph">
-          <?php echo $totaldoormobil; ?>
-          <small class="bpj bpl">
-            <?php
-            $persen = $totaldoormobil /$totaldoormobil;
-            $persen2 = round($persen *100);
-            echo $persen2;
-          ?>%
-          </small>
-        </h2>
-        <hr class="bpr aei">
-      </div>
-      <img src="../assets/img/download2.png">
-    </div>
-  </div>
-  <div class="eq fp afd amk asi">
-    <div class="brh bpo"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
-      <div class="ago">
-        <span class="bpi"><b>TOTAL ORDER DOORMOTOR</b></span>
-        <h2 class="bph">
-          <?php echo $totaldoormotor; ?>
-          <small class="bpj bpk">
-          <?php
-            $persen = $totaldoormotor/$totaldoormotor;
-            $persen2 = round($persen *100);
-            echo $persen2;
-          ?>%
-          </small>
-        </h2>
-        <hr class="bpr aei">
-      </div>
-      <img src="../assets/img/download3.png">
-    </div>
-  </div>
-  <div class="eq fp afd amk asi">
-    <div class="brh bpp"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
-      <div class="ago">
-        <span class="bpi"><b>ON PROGRESS</b></span>
-        <h2 class="bph">
-          <?php echo $jumlahprogress ; ?>
-          <small class="bpj bpl">
-          <?php
-            $persen = $jumlahprogress/$jumlahorder;
-            $persen2 = round($persen *100);
-            echo $persen2;
-          ?>%
-          </small>
-        </h2>
-        <hr class="bpr aei">
-      </div>
-      <img src="../assets/img/download4.png">
-    </div>
-  </div>
-  
-</div>
-<!--  -->
-
 
 
     <!-- Bootstrap core JavaScript

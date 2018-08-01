@@ -3,6 +3,12 @@
 $limit = 10;
 $queryorder = mysqli_query($conn, "SELECT * FROM transaksi LEFT JOIN member ON member.id_member = transaksi.id_member INNER JOIN layanan ON layanan.id_layanan = transaksi.id_layanan INNER JOIN produk ON produk.id_produk = transaksi.id_produk ORDER BY transaksi.id_member LIMIT  $limit");
 $jumlah = mysqli_num_rows($queryorder);
+
+$id=1;
+ if(!empty($_POST['opti'])){
+   $id=$_POST['opti'];
+ }
+ 
 ?>
 
 
@@ -37,6 +43,8 @@ $jumlah = mysqli_num_rows($queryorder);
                 </a>
               </li>
             </ul>
+
+            
           </div>
         </nav>
 
@@ -56,34 +64,22 @@ $jumlah = mysqli_num_rows($queryorder);
 <!--- grafik info ---->
 
 <div class="container">
-      <!-- <div class="jumbotron mt-3"> -->
-      <h4>Pengujian Sistem</h4>
+      <div class="jumbotron mt-3">
+      <h4>Filter Sequence</h4>
         
-        <p class="lead">Cari berdasarkan tanggal dan lihat analisis data.</p>
+        <p class="lead">This example is a quick exercise to illustrate how the bottom navbar works.</p>
 
 <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST" class="needs-validation" novalidate>
-      <div class="form-group row">
-                <div class="col-md-4 mb-3">
-                      <label for="validationDefault02">Tanggal Awal</label>
-                      <!--<input type="search" name="tglawal" class="form-control" id="validationDefault02">-->
-                      <input class="form-control mr-sm-2" type="search" name="tglawal" placeholder="Format: yyyy-mm-dd | ex: 2017-04-25">
-                </div>
-                <div class="col-md-4 mb-3">
-                      <label for="validationDefault02">Tanggal Akhir</label>
-                      <!--<input type="search" name="tglakhir" class="form-control" id="validationDefault02" placeholder="Format: yyyy-mm-dd | ex: 2017-12-25">-->
-                      <input class="form-control mr-sm-2" type="search" name="tglakhir" placeholder="Format: yyyy-mm-dd | ex: 2017-12-25">
-                </div>
-      </div>
+      
 
-           
-          <button name="caridata" class="btn btn-primary my-2 my-sm-0"  type="submit">Tampilkan Data</button>
-          <!--<button name="proses" class="btn btn-success my-2 my-sm-0"  type="submit">Proses</button>  -->
-          <a class="btn btn-success my-2 my-sm-0" href="datasequence.php" role="button">View Data Sequence »</a>          
+          <a class="btn btn-primary my-2 my-sm-0" href="dataconfidence.php" role="button">Back</a>  
+          <button name="proses" class="btn btn-success my-2 my-sm-0"  type="submit">Proses</button> 
+
               
            
 </form>     
         
-      <!-- </div> -->
+      </div>
     </div>
 <!--  -->
 
@@ -131,110 +127,88 @@ $jumlah = mysqli_num_rows($queryorder);
   //$queryorder = mysqli_query($conn, "SELECT * FROM transaksi LEFT JOIN member ON member.id_member = transaksi.id_member INNER JOIN layanan ON layanan.id_layanan = transaksi.id_layanan INNER JOIN produk ON produk.id_produk = transaksi.id_produk ORDER BY transaksi.id_order ");
 }
 ?>
+          
 
-          <h4>Table Orders</h4>
-          <div class="table-responsive">
+          
+          <!-- ============================================================= -->
+          <h4>Table Sequence</h4>
+<div class="table-responsive">
             <table class="table table-hover">
-              <thead>
+           
+        <thead>
                 <tr>
-                  <th>No</th>
-                  <th>Id User (SID)</th>
-                  <th>Date Order (EID)</th>             
-                  <th colspan="2">Item</th>
+                  <th>ID</th>
+                  <th>Frequent</th>            
+                  <th>Sequence</th> 
+                  <th>Confidence</th> 
                   
                 </tr>
               </thead>
+              <tbody>
+
+              <?php
+              //TOTAL PER ITEM
               
-<?php
-  
-  
 
-$i=1;
-if(isset($_POST['caridata']))
-{
-   
-  $tglawal = $_POST['tglawal'];
-  $tglakhir = $_POST['tglakhir'];
- 
-  $queryorder2 = mysqli_query($conn, "SELECT * FROM transaksi LEFT JOIN member ON member.id_member = transaksi.id_member INNER JOIN layanan ON layanan.id_layanan = transaksi.id_layanan INNER JOIN produk ON produk.id_produk = transaksi.id_produk  WHERE dateorder between '$tglawal' AND '$tglakhir' ORDER BY transaksi.dateorder"); 
-  
-  if($tglawal == 0 && $tglakhir == 0){
-      $kondisi = "Harap masukkan tanggal <b>Klik <a href='analis.php'>Refresh</a></b> <br> ";
-      echo '<div class="alert alert-danger" role="alert">';
-      echo $kondisi;
-      echo '</div>';
-  }
 
-  while($order = mysqli_fetch_array($queryorder2))
-  {
-  
-                echo '<tbody>';
-                echo '<tr>';
+        $no=0;
+        for($i = 0; $i < $item1; $i++) {
+            for($j = $i+1; $j < $item2; $j++) {
+                $item_pair = $item[$i].' | '.$item[$j]; 
+                $temp1 = $item_array[$item_pair] = 0;
                 
-                  echo '<th scope="row">'.$i.'</th>';
-                  echo '<td>' . $order['id_member'].'</td>';
-                  echo '<td>' . $order['dateorder'].'</td>';
-                  echo '<td colspan="2">' . $order['layanan_name'].' '. $order['produk_name'].'</td>';
+                foreach($belian as $item_belian) {
+                    if((strpos($item_belian, $item[$i]) !== false) && (strpos($item_belian, $item[$j]) !== false)) {
+                      
+                          $item_array[$item_pair]++;  
+                          $temp1++ ; 
+                        
+                    }
+                }
+                echo '<th scope="row">'.$no.'</th>';
+                echo '<td>' . $item_pair.'</td>';
+                echo '<td>' . $temp1.'</td>';
+                $con = 0;
+                foreach ($item as $value) {
+                    $temp2 = $total_per_item[$value] = 0;
+                    foreach($belian as $item_belian) {            
+                        if(strpos($item_belian, $value) !== false) {
+                           $total_per_item [$value]++;
+                          $temp2++ ; 
+                        
+                    }
+                }
+                //echo 'value= '.$value.' item= '.$item[$i].' temp2= '.$temp2.'<br>';
+                if(($value == $item[$i]) || ($item[$i] == $value)){
+                  //$con = ($temp1/$temp2);
+                  if ($temp1 == 0) {
+                      $hasil_bagi = "Tak terhingga ";
+                  } else { //jika pembagi tidak 0
+                      $con = ($temp1/$temp2);
+                  }
+
+                }
+                
+              }
+                
+                echo '<td>' . $con.'</td>';
                 echo '</tr>';
                 
                 
               echo '</tbody>';
-              $i++;
-                $jumlahsearch = $i;
-  }
-echo 'Periode '.$tglawal .' s.d '. $tglakhir;
-}
-else{
+              $no++;
 
-  while($order = mysqli_fetch_array($queryorder))
-  { 
-   //$idorder = $order['id_order'];
-   //$sort = array($idorder);
-   //sort($sort);
-   
-           
-                echo '<tbody>';
-                echo '<tr>';
-                  
-
-                  echo '<th scope="row">'.$i.'</th>';
-                  echo '<td>' . $order['id_member'].'</td>';
-                  echo '<td>' . $order['dateorder'].'</td>';
-                  echo '<td colspan="2">' . $order['layanan_name'].' -> '. $order['produk_name'].'</td>';
-                echo '</tr>';
-                
-                
-              echo '</tbody>';
-              $i++;
-              
-  }
-}
-$jumlahsearch = mysqli_num_rows($queryorder);
-?>
-           
-
+            }
+        }
+        
+            ?>
             </table>
           </div>
 
-<div class="row">
-  <div class="col-12 col-md-8">Showing <?php echo $jumlahsearch ; ?> of  <?php echo $jumlahorder ; ?> entries</div>
-  <div class="col-6 col-md-4">
-  <nav aria-label="...">
-  <ul class="pagination">
-    <li class="page-item disabled">
-      <a class="page-link" href="#" tabindex="-1">Previous</a>
-    </li>
-    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-    <li class="page-item ">
-      <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#">Next</a>
-    </li>
-  </ul>
-</nav>
+
 </div>
+
+
 
 </main>
 </div>

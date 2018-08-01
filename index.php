@@ -7,7 +7,6 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- meta tag -->
-    <link rel="icon" href="assets/img/favicon.png">
 
     <title>Welcome Page</title>
 
@@ -24,7 +23,7 @@
     <header>
       <h1 class="opening" >Selamat Datang di Website Analisis Data DoorJek</h1>
       <p class="deksripsi" >Silahkan melakukan login pada tombol login dibawah</p>
-      <a href="signin.php" target="_blank">Login</a>
+      <a href="signin.php">Login</a>
     </header>
 
     <footer>

@@ -1,9 +1,6 @@
 <?php include "header.php";?>
-<?php
-$limit = 10;
-$queryorder = mysqli_query($conn, "SELECT * FROM transaksi LEFT JOIN member ON member.id_member = transaksi.id_member INNER JOIN layanan ON layanan.id_layanan = transaksi.id_layanan INNER JOIN produk ON produk.id_produk = transaksi.id_produk ORDER BY transaksi.id_member LIMIT  $limit");
-$jumlah = mysqli_num_rows($queryorder);
-?>
+<?php include "function.php";?>
+
 
 
 
@@ -37,6 +34,8 @@ $jumlah = mysqli_num_rows($queryorder);
                 </a>
               </li>
             </ul>
+
+            
           </div>
         </nav>
 
@@ -56,10 +55,10 @@ $jumlah = mysqli_num_rows($queryorder);
 <!--- grafik info ---->
 
 <div class="container">
-      <!-- <div class="jumbotron mt-3"> -->
+      <div class="jumbotron mt-3">
       <h4>Pengujian Sistem</h4>
         
-        <p class="lead">Cari berdasarkan tanggal dan lihat analisis data.</p>
+        <p class="lead">This example is a quick exercise to illustrate how the bottom navbar works.</p>
 
 <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST" class="needs-validation" novalidate>
       <div class="form-group row">
@@ -75,15 +74,28 @@ $jumlah = mysqli_num_rows($queryorder);
                 </div>
       </div>
 
+      
+      <div class="form-group row">
+                <label for="opt_day" class="col-sm-2 col-form-label">Support</label>
+                <div class="form-group col-md-2">
+                      <input type="text" name="support" class="form-control" id="validationDefault02" placeholder="0" value="" required>
+                </div>
+
+                <label for="opt_day" class="col-sm-2 col-form-label">Sequence</label>
+                <div class="form-group col-md-2">
+                     <input type="text" name="sequence" class="form-control" id="validationDefault02" placeholder="0" value="" required>
+                </div>
+      </div>
+      
            
           <button name="caridata" class="btn btn-primary my-2 my-sm-0"  type="submit">Tampilkan Data</button>
-          <!--<button name="proses" class="btn btn-success my-2 my-sm-0"  type="submit">Proses</button>  -->
-          <a class="btn btn-success my-2 my-sm-0" href="datasequence.php" role="button">View Data Sequence »</a>          
+          <button name="proses" class="btn btn-success my-2 my-sm-0"  type="submit">Proses</button>  
+          <a class="btn btn-primary my-2 my-sm-0" href="datasequence.php" role="button">View Data Sequence »</a>          
               
            
 </form>     
         
-      <!-- </div> -->
+      </div>
     </div>
 <!--  -->
 
@@ -120,6 +132,10 @@ $jumlah = mysqli_num_rows($queryorder);
             <input type="text" class="form-control bsx" name="search" placeholder="Search orders">
           </form>-->
 </div>
+<?php
+    $pro=ambilVertikal(100);
+    $i=0;
+?>
 
 <?php
   
@@ -137,9 +153,9 @@ $jumlah = mysqli_num_rows($queryorder);
             <table class="table table-hover">
               <thead>
                 <tr>
-                  <th>No</th>
+                  
                   <th>Id User (SID)</th>
-                  <th>Date Order (EID)</th>             
+                  <th>Createdate (EID)</th>             
                   <th colspan="2">Item</th>
                   
                 </tr>
@@ -156,14 +172,8 @@ if(isset($_POST['caridata']))
   $tglawal = $_POST['tglawal'];
   $tglakhir = $_POST['tglakhir'];
  
-  $queryorder2 = mysqli_query($conn, "SELECT * FROM transaksi LEFT JOIN member ON member.id_member = transaksi.id_member INNER JOIN layanan ON layanan.id_layanan = transaksi.id_layanan INNER JOIN produk ON produk.id_produk = transaksi.id_produk  WHERE dateorder between '$tglawal' AND '$tglakhir' ORDER BY transaksi.dateorder"); 
+  $queryorder2 = mysqli_query($conn, "SELECT * FROM transaksi LEFT JOIN member ON member.id_member = transaksi.id_member INNER JOIN layanan ON layanan.id_layanan = transaksi.id_layanan INNER JOIN produk ON produk.id_produk = transaksi.id_produk  WHERE dateorder between '$tglawal' AND '$tglakhir' ORDER BY transaksi.id_member"); 
   
-  if($tglawal == 0 && $tglakhir == 0){
-      $kondisi = "Harap masukkan tanggal <b>Klik <a href='analis.php'>Refresh</a></b> <br> ";
-      echo '<div class="alert alert-danger" role="alert">';
-      echo $kondisi;
-      echo '</div>';
-  }
 
   while($order = mysqli_fetch_array($queryorder2))
   {
@@ -173,7 +183,7 @@ if(isset($_POST['caridata']))
                 
                   echo '<th scope="row">'.$i.'</th>';
                   echo '<td>' . $order['id_member'].'</td>';
-                  echo '<td>' . $order['dateorder'].'</td>';
+                  echo '<td>' . $order['createdate'].'</td>';
                   echo '<td colspan="2">' . $order['layanan_name'].' '. $order['produk_name'].'</td>';
                 echo '</tr>';
                 
@@ -182,33 +192,31 @@ if(isset($_POST['caridata']))
               $i++;
                 $jumlahsearch = $i;
   }
-echo 'Periode '.$tglawal .' s.d '. $tglakhir;
-}
-else{
 
-  while($order = mysqli_fetch_array($queryorder))
-  { 
-   //$idorder = $order['id_order'];
-   //$sort = array($idorder);
-   //sort($sort);
+}
+?>
+
    
            
-                echo '<tbody>';
-                echo '<tr>';
-                  
+                <tbody>
 
-                  echo '<th scope="row">'.$i.'</th>';
-                  echo '<td>' . $order['id_member'].'</td>';
-                  echo '<td>' . $order['dateorder'].'</td>';
-                  echo '<td colspan="2">' . $order['layanan_name'].' -> '. $order['produk_name'].'</td>';
-                echo '</tr>';
-                
-                
-              echo '</tbody>';
-              $i++;
+                    <?php
+                    foreach($pro as $p):
+                    $i++; 
+                    ?>
+                 
+                    <tr>
+                    <td><?= $p->id_member ?></td>
+                    <td><?= $p->createdate ?></td>
+                    <td><?= $p->layanan_name  .' -> '. $p->produk_name ?></td>
+                    </tr>
+                  <?php endforeach;?>
+                    
+                </tbody>
               
-  }
-}
+              
+  
+<?php
 $jumlahsearch = mysqli_num_rows($queryorder);
 ?>
            

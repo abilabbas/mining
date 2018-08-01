@@ -12,7 +12,7 @@ if( !isset($_GET['code']) ){
  
 // buat query untuk ambil data dari database 
 
-  $queryorder = mysqli_query($conn, "SELECT * FROM transaksi LEFT JOIN member ON member.id_member = transaksi.id_member LEFT JOIN layanan ON layanan.id_layanan = transaksi.id_layanan LEFT JOIN produk ON produk.id_produk = transaksi.id_produk LEFT JOIN payment ON payment.id_payment = transaksi.id_payment WHERE id_order='$code'");
+  $queryorder = mysqli_query($conn, "SELECT * FROM transaksi LEFT JOIN member ON member.id_member = transaksi.id_member LEFT JOIN layanan ON layanan.id_layanan = transaksi.id_layanan LEFT JOIN produk ON produk.id_produk = transaksi.id_produk LEFT JOIN payment ON payment.id_payment = transaksi.id_payment LEFT JOIN vehicle ON vehicle.id_vehicle = transaksi.id_vehicle WHERE id_order='$code'");
   $jumlah = mysqli_num_rows($queryorder);
   $order = mysqli_fetch_assoc($queryorder);
  
@@ -63,7 +63,7 @@ if( !isset($_GET['code']) ){
             <h1 class="h2">Detail Order</h1>
             <div class="btn-toolbar mb-2 mb-md-0">
               <div class="btn-group mr-2">
-                ccccccccccccccc
+                
               </div>
               
             </div>
@@ -229,19 +229,19 @@ if( !isset($_GET['code']) ){
           
           </div>
         </div>
-<!--
+
         <h4 class="mb-3">Detail Vehicle</h4>
 
          <div class="form-group row">
           <label for="staticEmail" class="col-sm-2 col-form-label">Nama Brand</label>
           <div class="col-sm-10">
           
-            <input type="text" id="disabledTextInput" class="form-control" placeholder="Jeep" readonly>
+            <input type="text" id="disabledTextInput" class="form-control" placeholder="<?php echo $order['vehicle_brand'] ?>" readonly>
           
           </div>
         </div>
 
-         <div class="form-group row">
+         <!-- <div class="form-group row">
           <label for="staticEmail" class="col-sm-2 col-form-label">Model</label>
           <div class="col-sm-10">
           
@@ -266,8 +266,8 @@ if( !isset($_GET['code']) ){
             <input type="text" id="disabledTextInput" class="form-control" placeholder=">2016" readonly>
           
           </div>
-        </div>
--->
+        </div> -->
+
         <div class="form-group row">
       
         </div>

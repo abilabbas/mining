@@ -2,6 +2,7 @@
 <?php 
  
 include("../config.php"); 
+include"../function.php";
  
 // kalau tidak ada id di query string 
 if( !isset($_GET['code']) ){     
@@ -212,6 +213,7 @@ if( !isset($_GET['code']) ){
                       <label for="validationDefault02">Waktu</label>
                       <input type="text" name="time" class="form-control" id="validationDefault02" placeholder="00:00 WIB" value="" required>
                 </div>
+            
             </div>
        
             <div class="form-group row">
