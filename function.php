@@ -21,7 +21,7 @@ function date_month() {
 	$bln = array(1=>"Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des");
 	for($bulan=1; $bulan<=12; $bulan++){
     if ($bulan_leng==1)
-    $i="0".$bulan;
+    $i='0'.$bulan;
     else
     $i=$bulan;
 	echo "<option value='$bulan'>$bln[$bulan]</option>";}

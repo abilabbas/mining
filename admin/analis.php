@@ -75,27 +75,13 @@ $jumlah = mysqli_num_rows($queryorder);
                 </div>
       </div>
 
-           
+      <div class="form-group row">
+        <div class="col-md-4 mb-3">   
           <button name="caridata" class="btn btn-primary my-2 my-sm-0"  type="submit">Tampilkan Data</button>
-          <!--<button name="proses" class="btn btn-success my-2 my-sm-0"  type="submit">Proses</button>  -->
-          <a class="btn btn-success my-2 my-sm-0" href="datasequence.php" role="button">View Data Sequence »</a>          
-              
-           
-</form>     
-        
-      <!-- </div> -->
-    </div>
-<!--  -->
-
-<div class="row flex-nowrap justify-content-between align-items-center">
-          <div class="col-4 pt-1">
-            
-          </div>
-          <div class="col-4 text-center">
-            <form action="<?php $_SERVER['PHP_SELF'];?>" method="POST">
-
-            
-
+        </div>
+</form> 
+        <div class="col-md-4 mb-3">
+          <form action="<?php $_SERVER['PHP_SELF'];?>" method="POST">
             <div class="input-group col col-lg-6">
             <select name="maxrows" class="custom-select" id="inputGroupSelect04">
               <option value="10">10</option>
@@ -110,16 +96,22 @@ $jumlah = mysqli_num_rows($queryorder);
               <button name="maxrows2" class="btn btn-outline-secondary" type="submit">Rows</button>
             </div>
             </div>
-
           </form>
-          </div>
-         <!-- <form action="<?php // $_SERVER['PHP_SELF'];?>" method="get" class="col-4 d-flex justify-content-end align-items-center">
-            <a class="text-muted" href="#">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-3"><circle cx="10.5" cy="10.5" r="7.5"></circle><line x1="21" y1="21" x2="15.8" y2="15.8"></line></svg>
-            </a>
-            <input type="text" class="form-control bsx" name="search" placeholder="Search orders">
-          </form>-->
-</div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <!--<button name="proses" class="btn btn-success my-2 my-sm-0"  type="submit">Proses</button>  -->
+          <a class="btn btn-info my-2 my-sm-0" href="datasequence.php" role="button">View Data Sequence »</a>
+        </div>
+      </div>   
+
+
+    
+        
+      <!-- </div> -->
+    </div>
+<!--  -->
+
+
 
 <?php
   
@@ -135,7 +127,7 @@ $jumlah = mysqli_num_rows($queryorder);
           <h4>Table Orders</h4>
           <div class="table-responsive">
             <table class="table table-hover">
-              <thead>
+              <thead class="thead-light">
                 <tr>
                   <th>No</th>
                   <th>Id User (SID)</th>
@@ -147,8 +139,6 @@ $jumlah = mysqli_num_rows($queryorder);
               
 <?php
   
-  
-
 $i=1;
 if(isset($_POST['caridata']))
 {
@@ -172,7 +162,7 @@ if(isset($_POST['caridata']))
                 echo '<tr>';
                 
                   echo '<th scope="row">'.$i.'</th>';
-                  echo '<td>' . $order['id_member'].'</td>';
+                  echo '<td data-toggle="tooltip" data-placement="top" title="'.$order['nama'].'">' . $order['id_member'].'</td>';
                   echo '<td>' . $order['dateorder'].'</td>';
                   echo '<td colspan="2">' . $order['layanan_name'].' '. $order['produk_name'].'</td>';
                 echo '</tr>';
@@ -198,7 +188,7 @@ else{
                   
 
                   echo '<th scope="row">'.$i.'</th>';
-                  echo '<td>' . $order['id_member'].'</td>';
+                  echo '<td data-toggle="tooltip" data-placement="top" title="'.$order['nama'].'">' . $order['id_member'].'</td>';
                   echo '<td>' . $order['dateorder'].'</td>';
                   echo '<td colspan="2">' . $order['layanan_name'].' <i class="icofont icofont-rotate-horizontal">arrow_right</i> '. $order['produk_name'].'</td>';
                 echo '</tr>';
@@ -218,21 +208,10 @@ $jumlahsearch = mysqli_num_rows($queryorder);
 
 <div class="row">
   <div class="col-12 col-md-8">Showing <?php echo $jumlahsearch ; ?> of  <?php echo $jumlahorder ; ?> entries</div>
+  <hr> <br>
   <div class="col-6 col-md-4">
   <nav aria-label="...">
-  <ul class="pagination">
-    <li class="page-item disabled">
-      <a class="page-link" href="#" tabindex="-1">Previous</a>
-    </li>
-    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-    <li class="page-item ">
-      <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#">Next</a>
-    </li>
-  </ul>
+ 
 </nav>
 </div>
 

@@ -122,8 +122,7 @@ $jumlahproduk = mysqli_num_rows($queryproduk);
     <!-- Bootstrap core CSS -->
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/icofont/css/icofont.min.css">
-    <!--<link href="https://bootstrap-themes.github.io/dashboard/assets/css/toolkit-light.css" rel="stylesheet">
-
+   
     <!-- Custom styles for this template -->
     <link href="../dashboard.css" rel="stylesheet">
   </head>
@@ -137,7 +136,7 @@ $jumlahproduk = mysqli_num_rows($queryproduk);
         <!--<?php // menampilkan pesan selamat datang
             //echo "Hai, selamat datang ". $_SESSION['username'];
         ?>-->
-          <a class="nav-link" href="logout.php">Logout <?php echo $namaOn;?></a>
+          <a class="nav-link" href="logout.php"><i class="icofont">user_alt_3</i> Logout <?php echo $namaOn;?></a>
           <!--<a class="nav-link" href="signin.php"> <?php //echo $_SESSION['userSession']; ?></a>-->
           
         </li>

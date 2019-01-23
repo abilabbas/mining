@@ -126,6 +126,7 @@ $jumlahproduk = mysqli_num_rows($queryproduk);
 
     <!-- Bootstrap core CSS -->
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+     <link rel="stylesheet" href="../assets/icofont/css/icofont.min.css">
     <!--<link href="https://bootstrap-themes.github.io/dashboard/assets/css/toolkit-light.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->

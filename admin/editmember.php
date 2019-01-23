@@ -55,7 +55,7 @@ if( mysqli_num_rows($sql) < 1 ){
             <h1 class="h2">Edit Member</h1>
             <div class="btn-toolbar mb-2 mb-md-0">
               <div class="btn-group mr-2">
-                ccccccccccccccc
+                
               </div>
               
             </div>

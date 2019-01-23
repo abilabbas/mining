@@ -67,6 +67,7 @@ if( !isset($_GET['code']) ){
               </div>
               
             </div>
+            
           </div>
 
 <!--info-->

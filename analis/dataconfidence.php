@@ -10,7 +10,7 @@
 
       
       while ($b = $result->fetch_row()) {
-        $belian[] = $b[0];
+        $trx[] = $b[0];
       }
       
         $result->close();
@@ -59,8 +59,7 @@
             <h1 class="h2">Analis</h1>
             <div class="btn-toolbar mb-2 mb-md-0">
               <div class="btn-group mr-2">
-                <!--<button class="btn btn-sm btn-outline-secondary">Share</button>-->
-                <!--<button class="btn btn-sm btn-outline-secondary">Export</button>-->
+               
               </div>
               
             </div>
@@ -71,7 +70,7 @@
 
 <div class="container">
      
-      <h4>Filter Sequence</h4>
+      <h4>Filter Frequent</h4>
         
        <!--  <p class="lead">Lakukan filter data untuk melihat hasil.</p> -->
 <form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET" class="needs-validation" novalidate>
@@ -79,7 +78,7 @@
       <div class="form-group row">
                 <div class="col-md-4 mb-3">
                       <label for="validationDefault02">Tanggal Awal</label>
-                      <!--<input type="search" name="tglawal" class="form-control" id="validationDefault02">-->
+                     
                       <input class="form-control mr-sm-2" type="search" name="tglawal" placeholder="Format: yyyy-mm-dd | ex: 2017-04-25">
                 </div>
                 <div class="col-md-4 mb-3">
@@ -107,7 +106,7 @@
                 </div>
                 <div class="col-md-4 mb-3">
                       
-                      <button type="submit" name="filter" class="btn btn-primary my-2 my-sm-0">Filter</button>
+                      <button type="submit" name="filter" class="btn btn-success my-2 my-sm-0"><i class="icofont">filter</i> Filter</button>
 
                 </div>
                 
@@ -135,7 +134,7 @@
 <div class="table-responsive">
             <table class="table table-hover">
            
-            <thead>
+            <thead class="thead-light">
                 <tr>
                   <th>No</th>
                   <th>Frequent</th>            
@@ -163,7 +162,7 @@ if(isset($_GET['caridata']))
        group by transaksi.id_order", MYSQLI_USE_RESULT)) 
   {      
       while ($b = $result->fetch_row()) {
-        $belian2[] = $b[0];
+        $trx2[] = $b[0];
       }
       
         $result->close();
@@ -185,12 +184,12 @@ if(isset($_GET['caridata']))
 
             for($j = $i+1; $j < $item2; $j++) 
             {
-                $item_pair = $item[$i].' | '.$item[$j]; 
+                $item_pair = $item[$i].' <i class="icofont icofont-rotate-horizontal">arrow_right</i> '.$item[$j]; 
                 $temp1 = $item_array[$item_pair] = 0;
                 
-                foreach($belian2 as $item_belian)
+                foreach($trx2 as $item_trx)
                 {
-                    if((strpos($item_belian, $item[$i]) !== false) && (strpos($item_belian, $item[$j]) !== false)) 
+                    if((strpos($item_trx, $item[$i]) !== false) && (strpos($item_trx, $item[$j]) !== false)) 
                     {
                       
                           $item_array[$item_pair]++;  
@@ -202,9 +201,9 @@ if(isset($_GET['caridata']))
                   foreach ($item as $value) 
                   {
                       $temp2 = $total_per_item[$value] = 0;
-                      foreach($belian as $item_belian) 
+                      foreach($trx as $item_trx) 
                       {            
-                          if(strpos($item_belian, $value) !== false) 
+                          if(strpos($item_trx, $value) !== false) 
                           {
                              $total_per_item [$value]++;
                             $temp2++ ; 
@@ -225,6 +224,19 @@ if(isset($_GET['caridata']))
                           $con = (int)(($temp1/$temp2)*100);
                       }
                     }
+
+                    if(($value == $item[$j]))
+                    {
+                      //mencari benchmark
+                      $bench = 0;
+                      if ($temp2 == 0 || $jumlahorder == 0) 
+                      {
+                        $hasil_bagi = "Tak terhingga ";
+                      } else { //jika pembagi tidak 0
+                        $bench = (int)(($temp2 / $jumlahorder)*100);
+                        
+                      }
+                    } //end benchmark
                   }
 
                   //menghitung nilai support
@@ -236,36 +248,25 @@ if(isset($_GET['caridata']))
                       $nsup = (int)(($temp1 / $jumlahorder)*100);       
                   }
 
-
-                  //mencari benchmark
-                  $bench = 0;
-                  if ($temp1 == 0) 
-                  {
-                      $hasil_bagi = "Tak terhingga ";
-                  } else 
-                  { //jika pembagi tidak 0
-                      $bench = $temp1 / $jumlahorder;
-                  }
-
                   //mencari lift ratio
                   $l_ratio = 0;
-                  if ($con == 0) {
+                  if ($con == 0 || $bench == 0) {
                     $hasil_bagi = "Tak terhingga ";
                   } else { //jika pembagi tidak 0
                     $l_ratio = ($con/$bench);
                   }
 
-                if($nsup >= $minSup)
+                if($con >= $minCon)
                 {
-                  if($con >= $minCon)
+                  if($nsup >= $minSup)
                   {
                     echo '<th scope="row">'.$no.'</th>';
                     echo '<td>' . $item_pair.'</td>'; //item frequent
                     echo '<td>' . $temp1.'</td>'; // jumlah kemunculan
                     echo '<td>' . $nsup.'%</td>'; //nilai support
                     echo '<td>' . $con.'%</td>'; //confidence
-                    echo '<td>'. $bench.'</td>';
-                    echo '<td>'. number_format((float)$l_ratio, 2,'.','').'</td>';
+                    echo '<td data-toggle="tooltip" data-placement="top" data-html="true" title="<em>(Jumlah order mengandung <u>'.$item[$i].'</u> dan <u>'.$item[$j].'</u> / Total Order <u>'.$jumlahorder.'</u> )*100</em> = ( '.$temp1.' / '.$jumlahorder.' ) * 100">'. $bench.'%</td>';
+                    echo '<td>'. number_format((float)$l_ratio, 1,'.','').'</td>';
                     echo '</tr>';
                     $no++; 
                   }
@@ -298,42 +299,44 @@ if(isset($_GET['filter']))
   echo 'Periode: '.$tgl1 .' s.d '. $tgl2;
 
   if($tgl1 != 0){
-  if ($result = $conn->query("select group_concat(layanan.layanan_name , produk.produk_name )
-        from transaksi left join layanan 
-       on (transaksi.id_layanan = layanan.id_layanan) left join produk
-       on (transaksi.id_produk = produk.id_produk) 
-       WHERE dateorder between '$tglawal' AND '$tglakhir' 
-       group by transaksi.id_order", MYSQLI_USE_RESULT)) 
+    if ($result = $conn->query("select group_concat(layanan.layanan_name , produk.produk_name )
+          from transaksi left join layanan 
+         on (transaksi.id_layanan = layanan.id_layanan) left join produk
+         on (transaksi.id_produk = produk.id_produk) 
+         WHERE dateorder between '$tglawal' AND '$tglakhir' 
+         group by transaksi.id_order", MYSQLI_USE_RESULT)) 
+    {
+
+        while ($b = $result->fetch_row()) 
+        {
+          $trx2[] = $b[0];
+          $tgl1 = $tglawal;
+          $tgl2 = $tglakhir;
+        }
+                  
+        $result->close();
+    }
+  } else {
+
+    if ($result = $conn->query("select group_concat(layanan.layanan_name , produk.produk_name )
+          from transaksi left join layanan 
+         on (transaksi.id_layanan = layanan.id_layanan) left join produk
+         on (transaksi.id_produk = produk.id_produk) 
+         group by transaksi.id_order", MYSQLI_USE_RESULT)) 
+    {
+
+        while ($b = $result->fetch_row()) 
+        {
+        $trx2[] = $b[0];
+        }          
+        $result->close();
+    }
+  }
+
+
+
+  if ($minSup == 0 && $minCon == 0) 
   {
-
-      while ($b = $result->fetch_row()) {
-      $belian2[] = $b[0];
-      $tgl1 = $tglawal;
-      $tgl2 = $tglakhir;
-  }
-                
-      $result->close();
-  }
-} else {
-
-  if ($result = $conn->query("select group_concat(layanan.layanan_name , produk.produk_name )
-        from transaksi left join layanan 
-       on (transaksi.id_layanan = layanan.id_layanan) left join produk
-       on (transaksi.id_produk = produk.id_produk) 
-       group by transaksi.id_order", MYSQLI_USE_RESULT)) 
-  {
-
-      while ($b = $result->fetch_row()) {
-      $belian2[] = $b[0];
-  }
-                
-      $result->close();
-  }
-}
-
-
-
-  if ($minSup == 0 && $minCon == 0) {
       $kondisi = "Harap input nilai minimum support untuk melakukan filter <b>Klik <a href='dataconfidence.php'>Refresh</a></b> <br> ";
       echo '<div class="alert alert-danger" role="alert">';
       echo $kondisi;
@@ -349,12 +352,12 @@ if(isset($_GET['filter']))
 
             for($j = $i+1; $j < $item2; $j++) 
             {
-                $item_pair = $item[$i].' | '.$item[$j]; 
+                $item_pair = $item[$i].' <i class="icofont icofont-rotate-horizontal">arrow_right</i> '.$item[$j]; 
                 $temp1 = $item_array[$item_pair] = 0;
                 
-                foreach($belian2 as $item_belian)
+                foreach($trx2 as $item_trx)
                 {
-                    if((strpos($item_belian, $item[$i]) !== false) && (strpos($item_belian, $item[$j]) !== false)) 
+                    if((strpos($item_trx, $item[$i]) !== false) && (strpos($item_trx, $item[$j]) !== false)) 
                     {
                       
                           $item_array[$item_pair]++;  
@@ -366,9 +369,9 @@ if(isset($_GET['filter']))
                   foreach ($item as $value) 
                   {
                       $temp2 = $total_per_item[$value] = 0;
-                      foreach($belian2 as $item_belian) 
+                      foreach($trx2 as $item_trx) 
                       {            
-                          if(strpos($item_belian, $value) !== false) 
+                          if(strpos($item_trx, $value) !== false) 
                           {
                              $total_per_item [$value]++;
                             $temp2++ ; 
@@ -389,56 +392,58 @@ if(isset($_GET['filter']))
                           $con = (int)(($temp1/$temp2)*100);
                       }
                     }
+
+                    if(($value == $item[$j]))
+                    {
+                      //mencari benchmark
+                      $bench = 0;
+                      if ($temp2 == 0 || $jumlahorder == 0) 
+                      {
+                        $hasil_bagi = "Tak terhingga ";
+                      } else { //jika pembagi tidak 0
+                        $bench = (int)(($temp2 / $jumlahorder)*100);
+                        
+                      }
+                    } //end benchmark
                   }
 
                   //menghitung nilai support
                   $nsup = 0;
-                  if ($temp1 == 0) 
+                  if ($temp1 == 0 || $jumlahorder == 0) 
                   {
                       $hasil = "Tak terhingga ";
                   } else { //jika pembagi tidak 0
                       $nsup = (int)(($temp1 / $jumlahorder)*100);       
                   }
 
-
-                  //mencari benchmark
-                  $bench = 0;
-                  if ($temp1 == 0) 
-                  {
-                      $hasil_bagi = "Tak terhingga ";
-                  } else 
-                  { //jika pembagi tidak 0
-                      $bench = $temp1 / $jumlahorder;
-                  }
-
                   //mencari lift ratio
                   $l_ratio = 0;
-                  if ($con == 0) {
+                  if ($con == 0 || $bench == 0) {
                     $hasil_bagi = "Tak terhingga ";
                   } else { //jika pembagi tidak 0
                     $l_ratio = ($con/$bench);
                   }
 
-                if($nsup >= $minSup)
+                if($con >= $minCon)
                 {
-                  if($con >= $minCon)
+                  if($nsup >= $minSup)
                   {
                     echo '<th scope="row">'.$no.'</th>';
                     echo '<td>' . $item_pair.'</td>'; //item frequent
                     echo '<td>' . $temp1.'</td>'; // jumlah kemunculan
                     echo '<td>' . $nsup.'%</td>'; //nilai support
                     echo '<td>' . $con.'%</td>'; //confidence
-                    echo '<td>'. $bench.'</td>';
-                    echo '<td>'. number_format((float)$l_ratio, 2,'.','').'</td>';
+                    echo '<td>'. $bench.'%</td>';
+                    echo '<td>'. number_format((float)$l_ratio, 1,'.','').'</td>';
                     echo '</tr>';
                     $no++; 
                   }
                 } //endkondisiminsup
             } //endloop
-        echo '</tbody>';
+          echo '</tbody>';
         } //endtotalperfrequent 
- } //endFilter
-} //endJikaNol
+  } //endJikaNol 
+} //endFilter
  else
 {
   echo '<tbody>';    
@@ -449,12 +454,12 @@ if(isset($_GET['filter']))
 
             for($j = $i+1; $j < $item2; $j++) 
             {
-                $item_pair = $item[$i].' | '.$item[$j]; 
+                $item_pair = $item[$i].' <i class="icofont icofont-rotate-horizontal">arrow_right</i> '.$item[$j]; 
                 $temp1 = $item_array[$item_pair] = 0;
                 
-                foreach($belian as $item_belian) 
+                foreach($trx as $item_trx) 
                 {
-                    if((strpos($item_belian, $item[$i]) !== false) && (strpos($item_belian, $item[$j]) !== false)) 
+                    if((strpos($item_trx, $item[$i]) !== false) && (strpos($item_trx, $item[$j]) !== false)) 
                     {
                       
                           $item_array[$item_pair]++;  
@@ -462,20 +467,26 @@ if(isset($_GET['filter']))
                     }
                 }
 
+                
+                
+
                 $nsup = 0;
                   if ($temp1 == 0) 
                   {
                       $hasil = "Tak terhingga ";
                   } else { //jika pembagi tidak 0
-                      $nsup = (int)(($temp1 / $jumlahorder)*100);       
+                      $nsup = (int)(($temp1 / $jumlahorder)*100);
+                      
                   }
+
+               
 
                   foreach ($item as $value) 
                 {
                     $temp2 = $total_per_item[$value] = 0;
-                    foreach($belian as $item_belian) 
+                    foreach($trx as $item_trx) 
                     {            
-                        if(strpos($item_belian, $value) !== false) 
+                        if(strpos($item_trx, $value) !== false) 
                         {
                            $total_per_item [$value]++;
                           $temp2++ ; 
@@ -491,38 +502,47 @@ if(isset($_GET['filter']))
                         $hasil_bagi = "Tak terhingga ";
                     } else { //jika pembagi tidak 0
                         $con = (int)(($temp1/$temp2)*100); //hitung mencari confidence
+                        
                     }
 
                   }
-                }
 
-                //mencari benchmark
-                $bench = 0;
-                if ($temp1 == 0) 
-                {
-                  $hasil_bagi = "Tak terhingga ";
-                } else { //jika pembagi tidak 0
-                  $bench = $temp1 / $jumlahorder;
-                }
-                
+                  if(($value == $item[$j])) //cek
+                  {
+                    //mencari benchmark
+                    $bench = 0;
+                    if ($temp2 == 0 || $jumlahorder == 0) 
+                    {
+                      $hasil_bagi = "Tak terhingga ";
+                    } else { //jika pembagi tidak 0
+                      $bench = (int)(($temp2 / $jumlahorder)*100);
+                      
+                    }
+                  }//end benchmark
+
+                } //end
+
+
                 //mencari lift ratio
                 $l_ratio = 0;
-                if ($con == 0) {
+                if ($con == 0 || $bench == 0) {
                   $hasil_bagi = "Tak terhingga ";
                 } else { //jika pembagi tidak 0
                   $l_ratio = ($con/$bench);
 
                 }
 
+                if($temp1 >= 1){
                 echo '<th scope="row">'.$no.'</th>'; // nomor
                 echo '<td>' . $item_pair.'</td>'; //item frequent
                 echo '<td>' . $temp1.'</td>'; //jumlah kemunculan
-                echo '<td>' . $nsup.'%</td>'; //nilai support
+                echo '<td>' . $nsup.'%</td>'; //nilai support      
                 echo '<td>' . $con.'%</td>'; //confidence
-                echo '<td>'. $bench.'</td>'; //benchmark
-                echo '<td>'. number_format((float)$l_ratio, 2,'.','').'</td>'; //lift ratio
+                echo '<td data-toggle="tooltip" data-placement="top" data-html="true" title="<em>(Jumlah order mengandung <u>'.$item[$i].'</u> dan <u>'.$item[$j].'</u> / Total Order <u>'.$jumlahorder.'</u> )*100</em> = ( '.$temp1.' / '.$jumlahorder.' ) * 100">'. $bench.'%</td>'; //benchmark
+                echo '<td>'. number_format((float)$l_ratio, 1,'.','').'</td>'; //lift ratio
                 echo '</tr>';
                 $no++; 
+                } //minKemunculan = 1;
 
             }
         } 
@@ -540,7 +560,7 @@ if(isset($_GET['filter']))
 <div class="table-responsive">
             <table class="table table-hover">
            
-        <thead>
+        <thead class="thead-light">
                 <tr>
                   <th>No</th>
                   <th>Rule</th>           
@@ -570,7 +590,7 @@ $minCon = $_POST['minCon'];
        group by transaksi.id_order", MYSQLI_USE_RESULT)) 
   {      
       while ($b = $result->fetch_row()) {
-        $belian2[] = $b[0];
+        $trx2[] = $b[0];
       }
       
         $result->close();
@@ -595,9 +615,9 @@ $minCon = $_POST['minCon'];
                 $item_pair = 'Jika Member memesan layanan <b>'. $item[$i].'</b> Maka member akan memilih paket layanan <b>'.$item[$j].'</b>'; 
                 $temp1 = $item_array[$item_pair] = 0;
                 
-                foreach($belian2 as $item_belian) 
+                foreach($trx2 as $item_trx) 
                 {
-                    if((strpos($item_belian, $item[$i]) !== false) && (strpos($item_belian, $item[$j]) !== false)) 
+                    if((strpos($item_trx, $item[$i]) !== false) && (strpos($item_trx, $item[$j]) !== false)) 
                     {
                       
                           $item_array[$item_pair]++;  
@@ -619,9 +639,9 @@ $minCon = $_POST['minCon'];
                 foreach ($item as $value) 
                 {
                     $temp2 = $total_per_item[$value] = 0;
-                    foreach($belian2 as $item_belian) 
+                    foreach($trx2 as $item_trx) 
                     {            
-                        if(strpos($item_belian, $value) !== false) 
+                        if(strpos($item_trx, $value) !== false) 
                         {
                            $total_per_item [$value]++;
                           $temp2++ ; 
@@ -639,36 +659,45 @@ $minCon = $_POST['minCon'];
                       }
 
                     }
-                }
 
-                //benchmark
-                $bench = 0;
-                if ($temp1 == 0) 
-                {
-                    $hasil_bagi = "Tak terhingga ";
-                } else { //jika pembagi tidak 0
-                    $bench = $temp1 / $jumlahorder;
+                    if(($value == $item[$j]))
+                    {
+                      //mencari benchmark
+                      $bench = 0;
+                      if ($temp2 == 0 || $jumlahorder == 0) 
+                      {
+                        $hasil_bagi = "Tak terhingga ";
+                      } else { //jika pembagi tidak 0
+                        $bench = (int)(($temp2 / $jumlahorder)*100);
+                        
+                      }
+                    }//end benchmark
                 }
 
                 //lift ratio
                 $l_ratio = 0;
-                if ($con == 0) {
+                if ($con == 0 || $bench == 0) {
                       $hasil_bagi = "Tak terhingga ";
                 } else { //jika pembagi tidak 0
                       $l_ratio = $con/$bench;
                 }
 
-                if($nsup >= $minSup)
+                if($con >= $minCon)
                 {
-                  if($con >= $minCon)
+                  if($nsup >= $minSup)
                   {
-                    echo '<th scope="row">'.$no.'</th>'; // nomor
-                    echo '<td>' . $item_pair.'</td>'; //item frequent
-                    echo '<td>' . $temp1.'</td>'; //jumlah kemunculan
-                    echo '<td>' . $nsup.'%</td>'; //nilai support
-                    echo '<td>' . $con.'%</td>'; //confidence
-                    //echo '<td>'. $bench.'</td>'; //benchmark
-                    echo '<td>'. number_format((float)$l_ratio, 2,'.','').'</td>'; //lift ratio
+                   
+                    echo '<th scope="row">'.$no.'</th>';
+                    echo '<td data-toggle="tooltip" data-placement="top" title="dengan support '.$nsup.'% dan confidence '.$con.'%">' . $item_pair.'</td>'; //item rule
+                    echo '<td>' . $temp1.'</td>'; //nilai item
+                    echo '<td data-toggle="tooltip" data-placement="top" data-html="true" title="(Jumlah order mengandung <u>'.$item[$i].'</u> / total order)*100 = ( '.$temp1.' / '.$jumlahorder.' ) * 100">' . $nsup.'%</td>'; //nilai support                
+                    if($item[$i] == 'Doormobil')
+                    {               
+                       echo '<td data-toggle="tooltip" data-placement="top" data-html="true" title="<em>(Jumlah order mengandung <u>'.$item[$i].'</u> dan <u>'.$item[$j].'</u> / Jumlah order mengandung <u>'.$item[$i].'</u> )*100</em> = ( '.$temp1.' / '.$totaldoormobil.' ) * 100">' . $con.'%</td>'; //confidence
+                    } else {
+                       echo '<td data-toggle="tooltip" data-placement="top" data-html="true" title="<em>(Jumlah order mengandung <u>'.$item[$i].'</u> dan <u>'.$item[$j].'</u> / Jumlah order mengandung <u>'.$item[$i].'</u> )*100</em> = ( '.$temp1.' / '.$totaldoormotor.' ) * 100">' . $con.'%</td>'; //confidence  
+                    }//echo '<td>'. $bench.'</td>'; //benchmark
+                    echo '<td data-toggle="tooltip" data-placement="top" data-html="true"  title="<em>Confidence / Benchmark</em> = '.$con.' / '.$bench.'">'. number_format((float)$l_ratio, 1,'.','').'</td>'; //lift ratio
                     echo '</tr>';
                       $no++; 
                   }
@@ -710,7 +739,7 @@ if($tgl1 != 0){
   {
 
       while ($b = $result->fetch_row()) {
-      $belian3[] = $b[0];
+      $trx3[] = $b[0];
       $tgl1 = $tglawal;
       $tgl2 = $tglakhir;
   }
@@ -727,7 +756,7 @@ if($tgl1 != 0){
   {
 
       while ($b = $result->fetch_row()) {
-      $belian2[] = $b[0];
+      $trx3[] = $b[0];
   }
                 
       $result->close();
@@ -750,12 +779,12 @@ if ($minSup == 0 && $minCon == 0) {
 
             for($j = $i+1; $j < $item2; $j++) 
             {
-                $item_pair = 'Jika Member memesan layanan <b>'. $item[$i].'</b> Maka member akan memilih paket layanan <b>'.$item[$j].'</b>'; 
+                
                 $temp1 = $item_array[$item_pair] = 0;
                 
-                foreach($belian2 as $item_belian) 
+                foreach($trx3 as $item_trx) 
                 {
-                    if((strpos($item_belian, $item[$i]) !== false) && (strpos($item_belian, $item[$j]) !== false)) 
+                    if((strpos($item_trx, $item[$i]) !== false) && (strpos($item_trx, $item[$j]) !== false)) 
                     {
                       
                           $item_array[$item_pair]++;  
@@ -777,9 +806,9 @@ if ($minSup == 0 && $minCon == 0) {
                 foreach ($item as $value) 
                 {
                     $temp2 = $total_per_item[$value] = 0;
-                    foreach($belian2 as $item_belian) 
+                    foreach($trx3 as $item_trx) 
                     {            
-                        if(strpos($item_belian, $value) !== false) 
+                        if(strpos($item_trx, $value) !== false) 
                         {
                            $total_per_item [$value]++;
                           $temp2++ ; 
@@ -797,36 +826,47 @@ if ($minSup == 0 && $minCon == 0) {
                       }
 
                     }
+
+                    if(($value == $item[$j]))
+                    {
+                      //mencari benchmark
+                      $bench = 0;
+                      if ($temp2 == 0 || $jumlahorder == 0) 
+                      {
+                        $hasil_bagi = "Tak terhingga ";
+                      } else { //jika pembagi tidak 0
+                        $bench = (int)(($temp2 / $jumlahorder)*100);
+                        
+                      }
+                    } //end benchmark
                 }
 
-                //benchmark
-                $bench = 0;
-                if ($temp1 == 0) 
-                {
-                    $hasil_bagi = "Tak terhingga ";
-                } else { //jika pembagi tidak 0
-                    $bench = $temp1 / $jumlahorder;
-                }
 
                 //lift ratio
                 $l_ratio = 0;
-                if ($con == 0) {
+                if ($con == 0 || $bench == 0) {
                       $hasil_bagi = "Tak terhingga ";
                 } else { //jika pembagi tidak 0
                       $l_ratio = $con/$bench;
                 }
 
-                if($nsup >= $minSup)
+                $item_pair = 'Jika Member memesan layanan <b>'. $item[$i].'</b> Maka member akan memilih paket layanan <b>'.$item[$j].'</b> dengan tingkat dominasi <i>Support '.$nsup.'%</i> dari total transaksi, dan rasio <i>Confidence '.$con.'%</i>. Maka Rule yang terbentuk memiliki kekuatan <i>Lift Ratio '. number_format((float)$l_ratio, 1,'.','').'</i> '; 
+                if($con >= $minCon)
                 {
-                  if($con >= $minCon)
+                  if($nsup >= $minSup)
                   {
-                    echo '<th scope="row">'.$no.'</th>'; // nomor
-                    echo '<td>' . $item_pair.'</td>'; //item frequent
-                    echo '<td>' . $temp1.'</td>'; //jumlah kemunculan
-                    echo '<td>' . $nsup.'%</td>'; //nilai support
-                    echo '<td>' . $con.'%</td>'; //confidence
-                    //echo '<td>'. $bench.'</td>'; //benchmark
-                    echo '<td>'. number_format((float)$l_ratio, 2,'.','').'</td>'; //lift ratio
+                    echo '<th scope="row">'.$no.'</th>';
+                    echo '<td data-toggle="tooltip" data-placement="top" title="dengan support '.$nsup.'% dan confidence '.$con.'%">' . $item_pair.'</td>'; //item rule
+                    echo '<td>' . $temp1.'</td>'; //nilai item
+                    echo '<td data-toggle="tooltip" data-placement="top" data-html="true" title="(Jumlah order mengandung <u>'.$item[$i].'</u> / total order)*100 = ( '.$temp1.' / '.$jumlahorder.' ) * 100">' . $nsup.'%</td>'; //nilai support                
+                    if($item[$i] == 'Doormobil')
+                    {               
+                       echo '<td data-toggle="tooltip" data-placement="top" data-html="true" title="<em>(Jumlah order mengandung <u>'.$item[$i].'</u> dan <u>'.$item[$j].'</u> / Jumlah order mengandung <u>'.$item[$i].'</u> )*100</em> = ( '.$temp1.' / '.$totaldoormobil.' ) * 100">' . $con.'%</td>'; //confidence
+                    } else {
+                       echo '<td data-toggle="tooltip" data-placement="top" data-html="true" title="<em>(Jumlah order mengandung <u>'.$item[$i].'</u> dan <u>'.$item[$j].'</u> / Jumlah order mengandung <u>'.$item[$i].'</u> )*100</em> = ( '.$temp1.' / '.$totaldoormotor.' ) * 100">' . $con.'%</td>'; //confidence  
+                    }
+                    // echo '<td>'. $bench.'%</td>'; //benchmark
+                    echo '<td data-toggle="tooltip" data-placement="top" data-html="true"  title="<em>Confidence / Benchmark</em> = '.$con.' / '.$bench.'">'. number_format((float)$l_ratio, 1,'.','').'</td>'; //lift ratio
                     echo '</tr>';
                       $no++; 
                   }
@@ -850,8 +890,8 @@ else {
                 $item_pair = 'Jika Member memesan layanan <b>'. $item[$i].'</b> Maka member akan memilih paket layanan <b>'.$item[$j].'</b>'; 
                 $temp1 = $item_array[$item_pair] = 0;
                 
-                foreach($belian as $item_belian) {
-                    if((strpos($item_belian, $item[$i]) !== false) && (strpos($item_belian, $item[$j]) !== false)) {
+                foreach($trx as $item_trx) {
+                    if((strpos($item_trx, $item[$i]) !== false) && (strpos($item_trx, $item[$j]) !== false)) {
                       
                           $item_array[$item_pair]++;  
                           $temp1++ ; 
@@ -870,8 +910,8 @@ else {
                 $con = 0;
                 foreach ($item as $value) {
                     $temp2 = $total_per_item[$value] = 0;
-                    foreach($belian as $item_belian) {            
-                        if(strpos($item_belian, $value) !== false) {
+                    foreach($trx as $item_trx) {            
+                        if(strpos($item_trx, $value) !== false) {
                            $total_per_item [$value]++;
                           $temp2++ ; 
                         
@@ -889,35 +929,45 @@ else {
                   }
 
                   }
-                }
 
-                //benchmark
-                $bench = 0;
-                if ($temp1 == 0) {
+                  if(($value == $item[$j]))
+                  {
+                    //mencari benchmark
+                    $bench = 0;
+                    if ($temp2 == 0 || $jumlahorder == 0) 
+                    {
                       $hasil_bagi = "Tak terhingga ";
-                  } else { //jika pembagi tidak 0
-                      $bench = $temp1 / $jumlahorder;
-                  }
+                    } else { //jika pembagi tidak 0
+                      $bench = (int)(($temp2 / $jumlahorder)*100);
+                      
+                    }
+                  }//end benchmark
+                }
 
                 //lift ratio
                 $l_ratio = 0;
-                if ($con == 0) {
+                if ($con == 0 || $bench == 0) {
                   $hasil_bagi = "Tak terhingga ";
                 } else { //jika pembagi tidak 0
                   $l_ratio = $con/$bench;
                 }
 
-                //if($temp1 >= $minSup){
+                if($temp1 >= 1){
                 echo '<th scope="row">'.$no.'</th>';
-                echo '<td>' . $item_pair.'</td>'; //item rule
+                echo '<td data-toggle="tooltip" data-placement="top" title="dengan support '.$nsup.'% dan confidence '.$con.'%">' . $item_pair.'</td>'; //item rule
                 echo '<td>' . $temp1.'</td>'; //nilai item
-                echo '<td>' . $nsup.'%</td>'; //nilai support                
-                echo '<td>' . $con.'%</td>'; //confidence
-                //echo '<td>'. $bench.'</td>'; //benchmark
-                echo '<td>'. number_format((float)$l_ratio, 2,'.','').'</td>'; //lift ratio
+                echo '<td data-toggle="tooltip" data-placement="top" data-html="true" title="(Jumlah order mengandung <u>'.$item[$i].'</u> / total order)*100 = ( '.$temp1.' / '.$jumlahorder.' ) * 100">' . $nsup.'%</td>'; //nilai support                
+                if($item[$i] == 'Doormobil')
+                {               
+                   echo '<td data-toggle="tooltip" data-placement="top" data-html="true" title="<em>(Jumlah order mengandung <u>'.$item[$i].'</u> dan <u>'.$item[$j].'</u> / Jumlah order mengandung <u>'.$item[$i].'</u> )*100</em> = ( '.$temp1.' / '.$totaldoormobil.' ) * 100">' . $con.'%</td>'; //confidence
+                } else {
+                   echo '<td data-toggle="tooltip" data-placement="top" data-html="true" title="<em>(Jumlah order mengandung <u>'.$item[$i].'</u> dan <u>'.$item[$j].'</u> / Jumlah order mengandung <u>'.$item[$i].'</u> )*100</em> = ( '.$temp1.' / '.$totaldoormotor.' ) * 100">' . $con.'%</td>'; //confidence  
+                }//echo '<td>'. $bench.'</td>'; //benchmark
+                echo '<td data-toggle="tooltip" data-placement="top" data-html="true"  title="<em>Confidence / Benchmark</em> = '.$con.' / '.$bench.'">'. number_format((float)$l_ratio, 1,'.','').'</td>'; //lift ratio
+                
                 echo '</tr>';
                   $no++; 
-                //} //endifMinSUp
+                } //endifMinKemnunculan
                 
               echo '</tbody>';
                        
@@ -930,8 +980,8 @@ else {
 ?>
 </table>
 </div>
-</div>
 
+</div>
 
 
 </main>
@@ -946,42 +996,18 @@ else {
     <script src="../assets/js/vendor/popper.min.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
 
+    <script>$('#example').tooltip(options)</script>
     <!-- Icons -->
     <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
     <script>
       feather.replace()
     </script>
-
-    <!-- Graphs --><!--
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
     <script>
-      var ctx = document.getElementById("myChart");
-      var myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-          datasets: [{
-            data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
-            lineTension: 0,
-            backgroundColor: 'transparent',
-            borderColor: '#007bff',
-            borderWidth: 4,
-            pointBackgroundColor: '#007bff'
-          }]
-        },
-        options: {
-          scales: {
-            yAxes: [{
-              ticks: {
-                beginAtZero: false
-              }
-            }]
-          },
-          legend: {
-            display: false,
-          }
-        }
+      $(document).ready(function(){
+          $('[data-toggle="tooltip"]').tooltip(); 
       });
-    </script>-->
+
+
+    </script>
   </body>
 </html>

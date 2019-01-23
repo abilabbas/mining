@@ -163,10 +163,10 @@
 
           </div>
           <form action="<?php $_SERVER['PHP_SELF'];?>" method="get" class="col-4 d-flex justify-content-end align-items-center">
-            <a class="text-muted" href="#">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-3"><circle cx="10.5" cy="10.5" r="7.5"></circle><line x1="21" y1="21" x2="15.8" y2="15.8"></line></svg>
-            </a>
+            <div class="btn-group mr-2">
             <input type="text" class="form-control bsx" name="search" placeholder="Search members">
+             <button name="search1" class="btn btn-primary my-2 my-sm-0"  type="submit"><i class="icofont">search_1</i></button>
+            </div>
           </form>
 </div>
 
@@ -186,7 +186,7 @@
         <h4>Table Members</h4>
           <div class="table-responsive">
             <table class="table table-hover">
-              <thead>
+              <thead class="thead-light">
                 <tr>
                   <th>No</th>
                   <th>Id User</th>
@@ -200,7 +200,7 @@
 
 $i = 1;
 
-if(isset($_GET['search']))
+if(isset($_GET['search1']))
 {
   $codesearch = $_GET['search'];
   
@@ -259,26 +259,17 @@ $jumlahsearch = mysqli_num_rows($query);
 
 <div class="row">
   <div class="col-12 col-md-8">Showing  <?php echo $jumlahsearch ; ?> of  <?php echo $jumlahmember ; ?> entries</div>
+  <hr><br>
   <div class="col-6 col-md-4">
   <nav aria-label="...">
-  <ul class="pagination">
-    <li class="page-item disabled">
-      <a class="page-link" href="#" tabindex="-1">Previous</a>
-    </li>
-    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-    <li class="page-item ">
-      <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#">Next</a>
-    </li>
-  </ul>
 </nav>
+
 
         </main>
       </div>
+
     </div>
+
     
     <!-- Bootstrap core JavaScript
     ================================================== -->

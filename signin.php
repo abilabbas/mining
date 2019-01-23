@@ -24,61 +24,62 @@
 
   <body class="text-center">
     <form action="<?php $_SERVER['PHP_SELF'];?>" method="POST" onSubmit="retun validasi()" class="form-signin">
-
-    <?php 
-
-require_once("config.php");
-
-session_start();
-    if(isset($_SESSION['userSession']))
-    {
-      header('location:admin/index.php');
-      exit();
-    }
-      else
-    {
-      if(isset($_POST['login']))
-      {
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        
-        
-        if((empty($email) === true) || (empty($password) === true))
-        {
-          echo "<div class='danger'>Tolong masukkan email dan password anda </div>";
-        }
-        else 
-        {
-          $scurity = md5($password);
-          $query = mysqli_query($conn,"SELECT * FROM admin WHERE (email ='$email') and password = '$scurity'");
-          $total = mysqli_num_rows($query);
-          $rows = mysqli_fetch_array($query);
-        
-          if($total === 1)
-          {
-            $_SESSION['userSession'] = $_POST['email'];
-            
-            if($rows['status'] == "admin" ) 
-            {
-              header("location:admin/index.php");
-              exit();
-              } elseif ($rows['level'] == "analis")
-              header("location:analis/index.php");
-              exit();
-            }
-          else
-          {
-            echo "<div class='danger'>email dan password anda tidak ada</div> ";
-          }
-        }
-      }
-    }
-
-
-  ?>
-
       <img class="mb-4" src="assets/img/logodoorjek.png" alt="" width="72" height="72">
       <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+      <?php 
+
+        require_once("config.php");
+
+        session_start();
+            if(isset($_SESSION['userSession']))
+            {
+              header('location:admin/index.php');
+              exit();
+            }
+              else
+            {
+              if(isset($_POST['login']))
+              {
+                $email = $_POST['email'];
+                $password = $_POST['password'];
+                
+                
+                if((empty($email) === true) || (empty($password) === true))
+                {
+                  
+                  echo '<div class=alert alert-danger" role="alert">Tolong masukkan email dan password anda </div>';
+                }
+                else 
+                {
+                  $scurity = md5($password);
+                  $query = mysqli_query($conn,"SELECT * FROM admin WHERE (email ='$email') and password = '$scurity'");
+                  $total = mysqli_num_rows($query);
+                  $rows = mysqli_fetch_array($query);
+                
+                  if($total === 1)
+                  {
+                    $_SESSION['userSession'] = $_POST['email'];
+                    
+                    if($rows['status'] == "admin" ) 
+                    {
+                      header("location:admin/index.php");
+                      exit();
+                      } elseif ($rows['status'] == "analis")
+                      header("location:analis/index.php");
+                      exit();
+                    }
+                  else
+                  { 
+
+                    echo $kondisi ='<div class="alert alert-danger" role="alert">'.'Email dan password anda tidak ada'.'</div>';
+                  }
+                }
+              }
+            }
+
+
+          ?>
+
       <label for="inputEmail" class="sr-only">Email address</label>
       <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required autofocus>
       <label for="inputPassword" class="sr-only">Password</label>

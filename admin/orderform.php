@@ -66,7 +66,7 @@ if( !isset($_GET['code']) ){
             <h1 class="h2">Form Order</h1>
             <div class="btn-toolbar mb-2 mb-md-0">
               <div class="btn-group mr-2">
-                Pesanan dilakukan atas nama  :<a href="#"> <?php echo $member['nama'] ?> </a>
+                Pesanan dilakukan atas nama :<a href="#"> <?php echo $member['nama'] ?> </a>
               </div>
               
             </div>
@@ -175,6 +175,26 @@ if( !isset($_GET['code']) ){
                 </div>
             </div>
             
+             <h4 class="mb-3">Detail Vehicle</h4>
+
+               <div class="form-group row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Nama Brand</label>
+                <div class="col-sm-10">
+                
+                  <select name="id_vehicle" class="custom-select" id="inputGroupSelect02">
+                    <option selected>Choose...</option>
+                        <?php
+                          $queryvehicle = mysqli_query($conn, "SELECT * FROM vehicle");
+                          while($vehicle = mysqli_fetch_array($queryvehicle))
+                          {
+                              echo "<option value=".$vehicle['id_vehicle'].">".$vehicle['vehicle_brand']."</option>";
+                          }
+                         ?>
+                   </select>
+                
+                </div>
+              </div>
+
             <h4 class="mb-3">Detail Order</h4>
             <div class="form-group row">
                 <label for="staticEmail" class="col-sm-2 col-form-label">Alamat</label>

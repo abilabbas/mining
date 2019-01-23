@@ -75,27 +75,13 @@ $jumlah = mysqli_num_rows($queryorder);
                 </div>
       </div>
 
-           
+      <div class="form-group row">
+        <div class="col-md-4 mb-3">   
           <button name="caridata" class="btn btn-primary my-2 my-sm-0"  type="submit">Tampilkan Data</button>
-          <!--<button name="proses" class="btn btn-success my-2 my-sm-0"  type="submit">Proses</button>  -->
-          <a class="btn btn-success my-2 my-sm-0" href="datasequence.php" role="button">View Data Sequence »</a>          
-              
-           
-</form>     
-        
-      <!-- </div> -->
-    </div>
-<!--  -->
-
-<div class="row flex-nowrap justify-content-between align-items-center">
-          <div class="col-4 pt-1">
-            
-          </div>
-          <div class="col-4 text-center">
-            <form action="<?php $_SERVER['PHP_SELF'];?>" method="POST">
-
-            
-
+        </div>
+</form> 
+        <div class="col-md-4 mb-3">
+          <form action="<?php $_SERVER['PHP_SELF'];?>" method="POST">
             <div class="input-group col col-lg-6">
             <select name="maxrows" class="custom-select" id="inputGroupSelect04">
               <option value="10">10</option>
@@ -110,8 +96,42 @@ $jumlah = mysqli_num_rows($queryorder);
               <button name="maxrows2" class="btn btn-outline-secondary" type="submit">Rows</button>
             </div>
             </div>
-
           </form>
+        </div>
+        <div class="col-md-4 mb-3">
+          <!--<button name="proses" class="btn btn-success my-2 my-sm-0"  type="submit">Proses</button>  -->
+          <a class="btn btn-info my-2 my-sm-0" href="datasequence.php" role="button">View Data Sequence »</a>
+        </div>
+      </div>   
+
+
+    
+        
+      <!-- </div> -->
+    </div>
+<!--  -->
+
+<div class="row flex-nowrap justify-content-between align-items-center">
+          <div class="col-4 pt-1">
+            
+          </div>
+          <div class="col-4 text-center">
+          <!-- <form action="<?php $_SERVER['PHP_SELF'];?>" method="POST">
+            <div class="input-group col col-lg-6">
+            <select name="maxrows" class="custom-select" id="inputGroupSelect04">
+              <option value="10">10</option>
+              <option value="25">25</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+              <option value="250">250</option>
+              <option value="500">500</option>
+              <option value="<?php echo $jumlahorder; ?>">All</option>
+            </select>
+            <div class="input-group-append">
+              <button name="maxrows2" class="btn btn-outline-secondary" type="submit">Rows</button>
+            </div>
+            </div>
+          </form> -->
           </div>
          <!-- <form action="<?php // $_SERVER['PHP_SELF'];?>" method="get" class="col-4 d-flex justify-content-end align-items-center">
             <a class="text-muted" href="#">
@@ -135,7 +155,7 @@ $jumlah = mysqli_num_rows($queryorder);
           <h4>Table Orders</h4>
           <div class="table-responsive">
             <table class="table table-hover">
-              <thead>
+              <thead class="thead-light">
                 <tr>
                   <th>No</th>
                   <th>Id User (SID)</th>
@@ -147,8 +167,6 @@ $jumlah = mysqli_num_rows($queryorder);
               
 <?php
   
-  
-
 $i=1;
 if(isset($_POST['caridata']))
 {
@@ -172,7 +190,7 @@ if(isset($_POST['caridata']))
                 echo '<tr>';
                 
                   echo '<th scope="row">'.$i.'</th>';
-                  echo '<td>' . $order['id_member'].'</td>';
+                  echo '<td data-toggle="tooltip" data-placement="top" title="'.$order['nama'].'">' . $order['id_member'].'</td>';
                   echo '<td>' . $order['dateorder'].'</td>';
                   echo '<td colspan="2">' . $order['layanan_name'].' '. $order['produk_name'].'</td>';
                 echo '</tr>';
@@ -198,9 +216,9 @@ else{
                   
 
                   echo '<th scope="row">'.$i.'</th>';
-                  echo '<td>' . $order['id_member'].'</td>';
+                  echo '<td data-toggle="tooltip" data-placement="top" title="'.$order['nama'].'">' . $order['id_member'].'</td>';
                   echo '<td>' . $order['dateorder'].'</td>';
-                  echo '<td colspan="2">' . $order['layanan_name'].' -> '. $order['produk_name'].'</td>';
+                  echo '<td colspan="2">' . $order['layanan_name'].' <i class="icofont icofont-rotate-horizontal">arrow_right</i> '. $order['produk_name'].'</td>';
                 echo '</tr>';
                 
                 

@@ -12,7 +12,9 @@ if(isset($_GET['code']) ){
  
     // apakah query hapus berhasil?     
     if( $sql ){         
-    	header('Location: orders.php');     
+    	header('Location: orders.php');
+        $berhasil = '<div class="alert alert-success" role="alert"> Data berhasil dihapus </div>';
+        echo $berhasil;     
     } else {         
     	die("gagal menghapus...");     } 
  

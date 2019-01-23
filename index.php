@@ -8,7 +8,9 @@
     <meta name="author" content="">
     <!-- meta tag -->
 
-    <title>Welcome Page</title>
+    <link rel="icon" href="assets/img/favicon.png">
+
+    <title>DoorjekAnalytic</title>
 
     <!-- bootstrap core -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -21,9 +23,11 @@
   <body>
 
     <header>
-      <h1 class="opening" >Selamat Datang di Website Analisis Data DoorJek</h1>
+      <img class="mb-4" src="assets/img/logodoorjek.png" alt="" width="72" height="72">
+      <h1 class="opening" >Selamat Datang</h1>
+      <h1 class="opening" >di Website Analisis Data DoorJek</h1>
       <p class="deksripsi" >Silahkan melakukan login pada tombol login dibawah</p>
-      <a href="signin.php">Login</a>
+      <a class="btn btn-primary my-2 my-sm-0" href="signin.php" role="button">Login</a> 
     </header>
 
     <footer>

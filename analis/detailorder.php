@@ -63,7 +63,7 @@ if( !isset($_GET['code']) ){
             <h1 class="h2">Detail Order</h1>
             <div class="btn-toolbar mb-2 mb-md-0">
               <div class="btn-group mr-2">
-                ccccccccccccccc
+               
               </div>
               
             </div>

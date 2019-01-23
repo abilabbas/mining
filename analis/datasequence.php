@@ -15,7 +15,7 @@
   {
 
       while ($b = $result->fetch_row()) {
-      $belianA[] = $b[0];
+      $trxA[] = $b[0];
       }
 
       $result->close();
@@ -105,8 +105,8 @@
                       <button name="caridata" class="btn btn-primary my-2 my-sm-0"  type="submit">Tampilkan Data</button>
                 </div>
                 <div class="col-md-4 mb-3">
-                      <button type="submit" name="filter" class="btn btn-primary my-2 my-sm-0">Filter</button>
-                      <a class="btn btn-success my-2 my-sm-0" href="dataconfidence.php" role="button">View Data Frequent »</a> 
+                      <button type="submit" name="filter" class="btn btn-success my-2 my-sm-0"><i class="icofont">filter</i> Filter</button>
+                      <a class="btn btn-info my-2 my-sm-0" href="dataconfidence.php" role="button">View Data Frequent »</a> 
                 </div>
                 
                 
@@ -133,7 +133,7 @@
 
           <div class="table-responsive">
             <table class="table table-hover">
-              <thead>
+              <thead class="thead-light">
                 <tr>
                   <th>ID</th>
                   <th>Sequence</th>            
@@ -160,7 +160,7 @@ if(isset($_GET['caridata']))
        group by transaksi.id_order", MYSQLI_USE_RESULT)) 
   {      
       while ($b = $result->fetch_row()) {
-        $belian2[] = $b[0];
+        $trx2[] = $b[0];
       }
       
         $result->close();
@@ -179,8 +179,8 @@ if(isset($_GET['caridata']))
                 
                foreach ($item as $value) {
                     $temp1 = $total_per_item[$value] = 0;
-                    foreach($belian2 as $item_belian) {            
-                        if(strpos($item_belian, $value) !== false) {
+                    foreach($trx2 as $item_trx) {            
+                        if(strpos($item_trx, $value) !== false) {
                            $total_per_item [$value]++;
                           $temp1++ ; 
                         }
@@ -236,7 +236,7 @@ if($tgl1 != 0){
   {
 
       while ($b = $result->fetch_row()) {
-      $belian2[] = $b[0];
+      $trx2[] = $b[0];
       }
 
       $result->close();
@@ -257,7 +257,7 @@ if($tgl1 != 0){
   {
 
       while ($b = $result->fetch_row()) {
-      $belian2[] = $b[0];
+      $trx2[] = $b[0];
       }
 
       $result->close();
@@ -278,8 +278,8 @@ if($tgl1 != 0){
                // menghitung jumlah item
                foreach ($item as $value) {
                     $temp1 = $total_per_item[$value] = 0;
-                    foreach($belian2 as $item_belian) {            
-                        if(strpos($item_belian, $value) !== false) {
+                    foreach($trx2 as $item_trx) {            
+                        if(strpos($item_trx, $value) !== false) {
                            $total_per_item [$value]++;
                           $temp1++ ; 
                         }
@@ -324,8 +324,8 @@ else {
                 
                foreach ($item as $value) {
                     $temp1 = $total_per_item[$value] = 0;
-                    foreach($belianA as $item_belian) {            
-                        if(strpos($item_belian, $value) !== false) {
+                    foreach($trxA as $item_trx) {            
+                        if(strpos($item_trx, $value) !== false) {
                            $total_per_item [$value]++;
                           $temp1++ ; 
                         }

@@ -33,6 +33,7 @@
                 </li>
               </ul>
           </div> 
+          
         </nav>
        
 
@@ -40,13 +41,57 @@
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
             <h1 class="h2">Dashboard</h1>
             <div class="btn-toolbar mb-2 mb-md-0">
+            <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST" class="needs-validation" novalidate>
               <div class="btn-group mr-2">
-                <!--<button class="btn btn-sm btn-outline-secondary">Share</button>-->
-                <!--<button class="btn btn-sm btn-outline-secondary">Export</button>-->
+               <input class="form-control mr-sm-2" type="search" name="tglawal" placeholder="From: yyyy-mm-dd">
+               <input class="form-control mr-sm-2" type="search" name="tglakhir" placeholder="To: yyyy-mm-dd">
+               <button name="caridata" class="btn btn-primary my-2 my-sm-0"  type="submit"><i class="icofont">search_1</i></button>
               </div>
+            </form>
             </div>
           </div>
 
+          <?php
+            if(isset($_POST['caridata']))
+            {
+               
+              $tglawal = $_POST['tglawal'];
+              $tglakhir = $_POST['tglakhir'];
+
+              
+              $queryall = mysqli_query($conn, "SELECT * FROM member WHERE createdatemember between '$tglawal' AND '$tglakhir' ORDER BY createdatemember");
+              $jumlahmember = mysqli_num_rows($queryall);
+
+              $queryorderall = mysqli_query($conn, "SELECT * FROM transaksi WHERE dateorder between '$tglawal' AND '$tglakhir' ORDER BY dateorder");
+              $jumlahorder = mysqli_num_rows($queryorderall);
+             
+             
+              $querydoormotor2 = mysqli_query($conn, "SELECT * FROM transaksi WHERE dateorder between '$tglawal' AND '$tglakhir' AND id_layanan='2'");
+              $totaldoormotor = mysqli_num_rows($querydoormotor2);
+              $querydoormotor = mysqli_query($conn, "SELECT * FROM transaksi WHERE dateorder between '$tglawal' AND '$tglakhir' AND id_layanan='2' && status='3'");
+              $jumlahdoormotor = mysqli_num_rows($querydoormotor);
+           
+
+              
+              $querydoormobil2 = mysqli_query($conn, "SELECT * FROM transaksi WHERE dateorder between '$tglawal' AND '$tglakhir' AND id_layanan='1'");
+              $totaldoormobil = mysqli_num_rows($querydoormobil2);
+              $querydoormobil = mysqli_query($conn, "SELECT * FROM transaksi WHERE dateorder between '$tglawal' AND '$tglakhir' AND id_layanan='1' && status='3'");
+              $jumlahdoormobil = mysqli_num_rows($querydoormobil);
+             
+
+              
+              $querycancel = mysqli_query($conn, "SELECT * FROM transaksi WHERE dateorder between '$tglawal' AND '$tglakhir' AND status='4'");
+              $jumlahcancel = mysqli_num_rows($querycancel);
+             
+
+              
+              $queryprogress = mysqli_query($conn, "SELECT * FROM transaksi WHERE dateorder between '$tglawal' AND '$tglakhir' AND status='1'");
+              $jumlahprogress = mysqli_num_rows($queryprogress);
+              
+            }
+
+             
+          ?>
           <!--============================--> 
           <div class="dh brg"> 
           
@@ -59,10 +104,14 @@
                    <?php echo $jumlahmember ; ?>
                     <small class="bpj bpk">
                     <?php
-                      $persen = $jumlahmember /$jumlahmember;
-                      $persen2 = round($persen *100);
-                      echo $persen2.'%';
-                    ?>
+                      if ($jumlahmember == 0) {
+                        $hasil_bagi = 0; echo $hasil_bagi;
+                      } else { //jika pembagi tidak 0
+                        $persen = $jumlahmember /$jumlahmember;
+                        $persen2 = round($persen *100);
+                        echo $persen2;
+                      }
+                    ?>%
                     </small>
 
                   </h2>
@@ -80,9 +129,15 @@
                     <?php echo $jumlahdoormobil; ?>
                     <small class="bpj bpl">
                       <?php
-                      $persen = $jumlahdoormobil /$totaldoormobil;
-                      $persen2 = round($persen *100);
-                      echo $persen2;
+                      if($jumlahdoormobil == 0 || $totaldoormobil == 0)
+                      {
+                        $hasil_bagi = 0;
+                        echo $hasil_bagi;
+                      } else {
+                        $persen = $jumlahdoormobil /$totaldoormobil;
+                        $persen2 = round($persen *100);
+                        echo $persen2;
+                      }
                     ?>%
                     </small>
                   </h2>
@@ -100,9 +155,14 @@
                     <?php echo $jumlahdoormotor; ?>
                     <small class="bpj bpk">
                     <?php
+                    if($jumlahdoormotor == 0 || $totaldoormotor == 0)
+                    {
+                     $hasil_bagi = 0; echo $hasil_bagi;
+                    } else {
                       $persen = $jumlahdoormotor /$totaldoormotor;
                       $persen2 = round($persen *100);
                       echo $persen2;
+                    }
                     ?>%
                     </small>
                   </h2>
@@ -120,9 +180,14 @@
                     <?php echo $jumlahorder ; ?>
                     <small class="bpj bpl">
                     <?php
+                    if($jumlahorder == 0)
+                    {
+                      $hasil_bagi = 0; echo $hasil_bagi;
+                    } else {
                       $persen = $jumlahorder/$jumlahorder;
                       $persen2 = round($persen *100);
                       echo $persen2;
+                    }
                     ?>%
                     </small>
                   </h2>
@@ -140,9 +205,14 @@
                     <?php echo $totaldoormobil; ?>
                     <small class="bpj bpl">
                       <?php
-                      $persen = $totaldoormobil /$totaldoormobil;
-                      $persen2 = round($persen *100);
-                      echo $persen2;
+                      if($totaldoormobil == 0)
+                      {
+                        $hasil_bagi = 0; echo $hasil_bagi;
+                      } else {
+                        $persen = $totaldoormobil /$totaldoormobil;
+                        $persen2 = round($persen *100);
+                        echo $persen2;
+                      }
                     ?>%
                     </small>
                   </h2>
@@ -160,9 +230,14 @@
                     <?php echo $totaldoormotor; ?>
                     <small class="bpj bpk">
                     <?php
+                    if($totaldoormotor == 0)
+                    {
+                      $hasil_bagi = 0; echo $hasil_bagi;
+                    } else {
                       $persen = $totaldoormotor/$totaldoormotor;
                       $persen2 = round($persen *100);
                       echo $persen2;
+                    }
                     ?>%
                     </small>
                   </h2>
@@ -180,9 +255,14 @@
                     <?php echo $jumlahprogress ; ?>
                     <small class="bpj bpl">
                     <?php
+                    if($jumlahprogress == 0 || $jumlahorder == 0)
+                    {
+                      $hasil_bagi = 0; echo $hasil_bagi;
+                    } else {
                       $persen = $jumlahprogress/$jumlahorder;
                       $persen2 = round($persen *100);
                       echo $persen2;
+                    }
                     ?>%
                     </small>
                   </h2>
@@ -199,10 +279,15 @@
                   <h2 class="bph">
                     <?php echo $jumlahcancel; ?>
                     <small class="bpj bpl">
-                      <?php
-                      $persen = $jumlahcancel /$jumlahorder;
-                      $persen2 = round($persen *100);
-                      echo $persen2;
+                    <?php
+                    if($jumlahcancel == 0 || $jumlahorder == 0)
+                    {
+                      $hasil_bagi = 0; echo $hasil_bagi;
+                    } else {
+                        $persen = $jumlahcancel /$jumlahorder;
+                        $persen2 = round($persen *100);
+                        echo $persen2;
+                    }
                     ?>%
                     </small>
                   </h2>
@@ -214,6 +299,7 @@
           </div><!--end dh brg-->
 
         </main>
+        
       </div>
     </div>    
 
